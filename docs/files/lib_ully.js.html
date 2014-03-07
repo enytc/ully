@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/ully.js - Ully API</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="Ully API"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/Helpers.html">Helpers</a></li>
+            
+                <li><a href="../classes/Ully.html">Ully</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: lib/ully.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*
+ * ully
+ * https://github.com/enytc/ully
+ *
+ * Copyright (c) 2014 Christopher EnyTC
+ * Licensed under the BSD license.
+ */
+
+&#x27;use strict&#x27;;
+
+/*
+ * Module Dependencies
+ */
+
+var request = require(&#x27;superagent&#x27;);
+var inquirer = require(&#x27;inquirer&#x27;);
+var debug = require(&#x27;./debugger.js&#x27;);
+var async = require(&#x27;async&#x27;);
+var _ = require(&#x27;underscore&#x27;);
+var h = require(&#x27;./helpers.js&#x27;);
+var pj = require(&#x27;prettyjson&#x27;).render;
+var join = require(&#x27;path&#x27;).join;
+
+/*
+ * Private Methods
+ */
+
+function response(err, res, pureJson, message, type) {
+    if (err) {
+        throw err;
+    }
+    if (res) {
+        if (!pureJson) {
+            console.log(&#x27;\n[ &#x27; + &#x27;Response&#x27;.green.bold + &#x27; ] ==&gt; &#x27;);
+            console.log();
+            console.log(pj(res.body));
+        } else {
+            console.log(JSON.stringify(res.body, null, 4));
+        }
+    }
+    if (message &amp;&amp; type) {
+        debug(message, type);
+    }
+    if (message &amp;&amp; !type) {
+        debug(message);
+    }
+}
+
+/*
+ * Public Methods
+ */
+
+/**
+ * @class Ully
+ *
+ * @constructor
+ *
+ * Constructor responsible for provide api requests
+ *
+ * @example
+ *
+ *     var api = new Ully(&#x27;access_token&#x27;);
+ *
+ * @param {String} access_token Access Token
+ */
+
+var Ully = module.exports = function Ully(token) {
+    //Access Token
+    this.access_token = token;
+    //apiUri
+    this.uri = &#x27;https://ully.herokuapp.com&#x27;;
+    var apiUri = &#x27;https://ully.herokuapp.com/:path&#x27;;
+    //Get handler
+    this.get = function (path, cb) {
+        request
+            .get(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.access_token))
+            .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+            .end(cb);
+    };
+    //Post handler
+    this.post = function (path, body, cb) {
+        request
+            .post(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.access_token))
+            .send(body)
+            .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+            .end(cb);
+    };
+    //Put handler
+    this.put = function (path, body, cb) {
+        request
+            .put(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.access_token))
+            .send(body)
+            .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+            .end(cb);
+    };
+    //Delete handler
+    this.delete = function (path, body, cb) {
+        request
+            .del(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.access_token))
+            .send(body)
+            .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+            .end(cb);
+    };
+};
+
+//HandlerExceptions
+process.on(&#x27;uncaughtException&#x27;, function (err) {
+    console.log();
+    console.error(err.stack);
+    console.error(err);
+});
+
+/**
+ * Method responsible for asking questions
+ *
+ * @example
+ *
+ *     api.prompt(prompts, cb);
+ *
+ * @method prompt
+ * @public
+ * @param {Object} prompts Array of prompt options
+ * @param {Function} cb A callback
+ */
+
+Ully.prototype.prompt = function prompt(prompts, cb) {
+    inquirer.prompt(prompts, function (answers) {
+        cb(answers);
+    });
+};
+
+/**
+ * Method responsible for create accounts
+ *
+ * @example
+ *
+ *     api.signup(&#x27;name&#x27;, &#x27;email&#x27;, &#x27;username&#x27;, &#x27;password&#x27;);
+ *
+ * @method signup
+ * @public
+ * @param {String} name Name
+ * @param {String} email Email
+ * @param {String} username Username
+ * @param {String} password Password
+ */
+
+Ully.prototype.signup = function signup(name, email, username, password) {
+    this.post(&#x27;signup&#x27;, {
+        name: name,
+        email: email,
+        username: username,
+        password: password
+    }, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for login in accounts
+ *
+ * @example
+ *
+ *     api.login(&#x27;email&#x27;, &#x27;username&#x27;, &#x27;password&#x27;);
+ *
+ * @method login
+ * @public
+ * @param {String} email Email
+ * @param {String} username Username
+ * @param {String} password Password
+ */
+
+Ully.prototype.login = function login(email, username, password) {
+    this.post(&#x27;forgot/token&#x27;, {
+        email: email,
+        username: username,
+        password: password
+    }, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        //Write config
+        if (res.body.token &amp;&amp; res.body.role) {
+            h.write(join(__dirname, &#x27;ullyConfig.json&#x27;), JSON.stringify(res.body, null, 4));
+            response(null, null, null, &#x27;Logged successfully!&#x27;, &#x27;success&#x27;);
+        } else {
+            response(null, null, null, &#x27;Login failed. Try again!&#x27;, &#x27;error&#x27;);
+        }
+    });
+};
+
+/**
+ * Method responsible for reset passwords
+ *
+ * @example
+ *
+ *     api.forgot(&#x27;email&#x27;, &#x27;username&#x27;);
+ *
+ * @method forgot
+ * @public
+ * @param {String} email Email
+ * @param {String} username Username
+ */
+
+Ully.prototype.forgot = function forgot(email, username) {
+    this.post(&#x27;forgot&#x27;, {
+        email: email,
+        username: username
+    }, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for showing stats of Ully
+ *
+ * @example
+ *
+ *     api.stats();
+ *
+ * @method stats
+ * @public
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.stats = function stats(pureJson) {
+    this.get(&#x27;stats&#x27;, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res, pureJson);
+    });
+};
+
+/**
+ * Method responsible for showing stats of a specific user
+ *
+ * @example
+ *
+ *     api.statsByUserId();
+ *
+ * @method statsByUserId
+ * @public
+ * @param {String} userid User ID
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.statsByUserId = function statsByUserId(userid, pureJson) {
+    this.get(join(&#x27;stats&#x27;, userid, &#x27;?:token&#x27;), function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res, pureJson);
+    });
+};
+
+/**
+ * Method responsible for showing the status of api
+ *
+ * @example
+ *
+ *     api.status();
+ *
+ * @method status
+ * @public
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.status = function status(pureJson) {
+    this.get(&#x27;status&#x27;, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res, pureJson);
+    });
+};
+
+
+/**
+ * Method responsible for showing profile info
+ *
+ * @example
+ *
+ *     api.me();
+ *
+ * @method me
+ * @public
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.me = function me(pureJson) {
+    this.get(&#x27;me?:token&#x27;, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        var obj = {
+            body: _.pick(res.body, [&#x27;name&#x27;, &#x27;email&#x27;, &#x27;username&#x27;, &#x27;status&#x27;])
+        }
+        response(null, obj, pureJson);
+    });
+};
+
+/**
+ * Method responsible for update profile info
+ *
+ * @example
+ *
+ *     api.updateMe(&#x27;name&#x27;, email&#x27;, &#x27;username&#x27;, &#x27;password&#x27;);
+ *
+ * @method updateMe
+ * @public
+ * @param {String} name Name
+ * @param {String} email Email
+ * @param {String} username Username
+ * @param {String} password Password
+ */
+
+Ully.prototype.updateMe = function updateMe(name, email, username, password) {
+    var meObj = {
+        name: name,
+        email: email,
+        username: username,
+        password: password
+    };
+    _.each(meObj, function (val, key) {
+        if (meObj[key] === &#x27;&#x27;) {
+            delete meObj[key];
+        }
+    });
+    this.put(&#x27;me?:token&#x27;, meObj, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, null, null, res.body.message);
+    });
+};
+
+/**
+ * Method responsible for delete profile info
+ *
+ * @example
+ *
+ *     api.deleteMe();
+ *
+ * @method deleteMe
+ * @public
+ */
+
+Ully.prototype.deleteMe = function deleteMe() {
+
+    this.delete(&#x27;me?:token&#x27;, null, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        if (h.exists(__dirname + &#x27;/ullyConfig.json&#x27;)) {
+            h.remove(__dirname + &#x27;/ullyConfig.json&#x27;);
+        }
+        response(null, null, null, res.body.message);
+    });
+};
+
+/**
+ * Method responsible for list all users
+ *
+ * @example
+ *
+ *     api.users();
+ *
+ * @method users
+ * @public
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.users = function users(pureJson) {
+    this.get(&#x27;users?:token&#x27;, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for showing info of a specific user by username
+ *
+ * @example
+ *
+ *     api.UsersByUsername();
+ *
+ * @method UsersByUsername
+ * @public
+ * @param {String} username Username
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.UsersByUsername = function UsersByUsername(username, pureJson) {
+    this.get(join(&#x27;users&#x27;, &#x27;id&#x27;, username, &#x27;?:token&#x27;), function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res, pureJson);
+    });
+};
+
+/**
+ * Method responsible for showing info of a specific user
+ *
+ * @example
+ *
+ *     api.usersShow();
+ *
+ * @method usersShow
+ * @public
+ * @param {String} userid Username
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.usersShow = function usersShow(userid, pureJson) {
+    this.get(join(&#x27;users&#x27;, userid, &#x27;?:token&#x27;), function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res, pureJson);
+    });
+};
+
+/**
+ * Method responsible for create a new user
+ *
+ * @example
+ *
+ *     api.createUsers(&#x27;name&#x27;, email&#x27;, &#x27;username&#x27;, &#x27;password&#x27;, &#x27;role&#x27;, &#x27;status&#x27;);
+ *
+ * @method createUsers
+ * @public
+ * @param {String} name Name
+ * @param {String} email Email
+ * @param {String} username Username
+ * @param {String} password Password
+ * @param {String} role User role
+ * @param {Boolean} status User status
+ */
+
+Ully.prototype.createUsers = function createUsers(name, email, username, password, role, status) {
+    this.post(&#x27;users?:token&#x27;, {
+        name: name,
+        email: email,
+        username: username,
+        password: password,
+        role: role,
+        status: status
+    }, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for update a specific user info
+ *
+ * @example
+ *
+ *     api.updateUsers(&#x27;userid&#x27;, &#x27;name&#x27;, email&#x27;, &#x27;username&#x27;, &#x27;password&#x27;, &#x27;role&#x27;, &#x27;status&#x27;);
+ *
+ * @method updateUsers
+ * @public
+ * @param {String} userid User ID
+ * @param {String} name Name
+ * @param {String} email Email
+ * @param {String} username Username
+ * @param {String} password Password
+ * @param {String} role User role
+ * @param {Boolean} status User status
+ */
+
+Ully.prototype.updateUsers = function updateUsers(userid, name, email, username, password, role, status) {
+    var usersObj = {
+        name: name,
+        email: email,
+        username: username,
+        password: password,
+        role: role,
+        status: status
+    };
+    _.each(usersObj, function (val, key) {
+        if (usersObj[key] === &#x27;&#x27;) {
+            delete usersObj[key];
+        }
+    });
+    this.put(join(&#x27;users&#x27;, userid, &#x27;?:token&#x27;), usersObj, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for remove a specific user info
+ *
+ * @example
+ *
+ *     api.deleteUsers(&#x27;userid&#x27;);
+ *
+ * @method deleteUsers
+ * @public
+ * @param {String} userid User ID
+ */
+
+Ully.prototype.deleteUsers = function deleteUsers(userid) {
+    this.delete(join(&#x27;users&#x27;, userid, &#x27;?:token&#x27;), null, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for list all collections
+ *
+ * @example
+ *
+ *     api.moderation();
+ *
+ * @method moderation
+ * @public
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.moderation = function moderation(pureJson) {
+    this.get(&#x27;moderation?:token&#x27;, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for generate a dinamic list of collections
+ *
+ * @example
+ *
+ *     api.listCollectionsByUserId();
+ *
+ * @method listCollectionsByUserId
+ * @public
+ * @param {String} userid User ID
+ * @param {Function} cb A callback
+ */
+
+Ully.prototype.listCollectionsByUserId = function listCollectionsByUserId(userid, cb) {
+    this.get(join(&#x27;moderation&#x27;, userid, &#x27;?:token&#x27;), function (err, res) {
+        if (err) {
+            throw err;
+        }
+        var list = [];
+        //Start
+        _.each(res.body, function (val, key) {
+            list.push({
+                name: val.name + &#x27; -&gt; &#x27; + val.slug,
+                value: val.slug
+            });
+        });
+        //Callback
+        cb(list);
+    });
+};
+
+/**
+ * Method responsible for generate a dinamic list of urls in selected collection
+ *
+ * @example
+ *
+ *     api.listUrlsOnSelectedCollection();
+ *
+ * @method listUrlsOnSelectedCollection
+ * @public
+ * @param {String} userid User ID
+ * @param {Function} cb A callback
+ */
+
+Ully.prototype.listUrlsOnSelectedCollection = function listUrlsOnSelectedCollection(userid, cb) {
+    this.get(join(&#x27;moderation&#x27;, userid, &#x27;?:token&#x27;), function (err, res) {
+        if (err) {
+            throw err;
+        }
+        var list = [];
+        //Start
+        _.each(res.body, function (val, key) {
+            _.each(val.urls, function (uval, ukey) {
+                list.push({
+                    name: uval.url,
+                    value: uval._id
+                });
+            });
+        });
+        //Callback
+        cb(list);
+    });
+};
+
+/**
+ * Method responsible for list all collections by userid
+ *
+ * @example
+ *
+ *     api.moderationShowCollectionByUser();
+ *
+ * @method moderationShowCollectionByUser
+ * @public
+ * @param {String} userid User ID
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.moderationShowCollectionByUser = function moderationShowCollectionByUser(userid, pureJson) {
+    this.get(join(&#x27;moderation&#x27;, userid, &#x27;?:token&#x27;), function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for delete a specific collection
+ *
+ * @example
+ *
+ *     api.moderationDeleteCollection(&#x27;userid&#x27;, &#x27;collection&#x27;);
+ *
+ * @method moderationDeleteCollection
+ * @public
+ * @param {String} userid User ID
+ * @param {String} collection Collection ID
+ */
+
+Ully.prototype.moderationDeleteCollection = function moderationDeleteCollection(userid, collection) {
+    this.delete(join(&#x27;moderation&#x27;, userid, collection, &#x27;?:token&#x27;), null, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for delete a specific url in selected collection
+ *
+ * @example
+ *
+ *     api.moderationDeleteUrl(&#x27;userid&#x27;, &#x27;collection&#x27;, &#x27;urlid&#x27;);
+ *
+ * @method moderationDeleteUrl
+ * @public
+ * @param {String} userid User ID
+ * @param {String} collection Collection ID
+ * @param {String} urlid Url ID
+ */
+
+Ully.prototype.moderationDeleteUrl = function moderationDeleteUrl(userid, collection, urlid) {
+    this.delete(join(&#x27;moderation&#x27;, userid, collection, &#x27;urls&#x27;, urlid, &#x27;?:token&#x27;), null, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for list all collections
+ *
+ * @example
+ *
+ *     api.collections();
+ *
+ * @method collections
+ * @public
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.collections = function collections(pureJson) {
+    this.get(&#x27;collections?fields=name,slug,urls,public&amp;:token&#x27;, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        if (res.body.length &lt; 1) {
+            console.log(&#x27;  You don\&#x27;t have collections. \n  Create your first collection.\n&#x27; + &#x27;\n  $ ully collections:new&#x27;.bold.white);
+            process.exit();
+        }
+        response(null, res);
+    });
+};
+
+
+/**
+ * Method responsible for list all collections of a specific user
+ *
+ * @example
+ *
+ *     api.collectionsByUsername();
+ *
+ * @method collectionsByUsername
+ * @public
+ * @param {String} username Username
+ * @param {Boolean} pureJson If true show json raw
+ */
+
+Ully.prototype.collectionsByUsername = function collectionsByUsername(username, pureJson) {
+    this.get(join(username, &#x27;collections&#x27;, &#x27;?fields=name,slug,urls,public&amp;:token&#x27;), function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+
+/**
+ * Method responsible for generate a dinamic list of collections
+ *
+ * @example
+ *
+ *     api.listCollections();
+ *
+ * @method listCollections
+ * @public
+ * @param {Function} cb A callback
+ */
+
+Ully.prototype.listCollections = function listCollections(cb) {
+    this.get(&#x27;collections?:token&#x27;, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        var list = [];
+        //Start
+        _.each(res.body, function (val, key) {
+            list.push({
+                name: val.name + &#x27; -&gt; &#x27; + val.slug,
+                value: val.slug
+            });
+        });
+        //Callback
+        cb(list);
+    });
+};
+
+/**
+ * Method responsible for generate a dinamic list of urls
+ *
+ * @example
+ *
+ *     api.listUrls();
+ *
+ * @method listUrls
+ * @public
+ * @param {String} collection Username
+ * @param {Function} cb A callback
+ */
+
+Ully.prototype.listUrls = function listUrls(collection, cb) {
+    this.get(&#x27;collections?:token&#x27;, function (err, res) {
+        if (err) {
+            throw err;
+        }
+        var list = [];
+        var selectedCollection = _.where(res.body, {
+            slug: collection
+        });
+        //Start
+        _.each(selectedCollection[0].urls, function (val, key) {
+            list.push({
+                name: val.url,
+                value: val._id
+            });
+        });
+        //Callback
+        cb(list);
+    });
+};
+
+/**
+ * Method responsible for create a new collection
+ *
+ * @example
+ *
+ *     api.createCollections(&#x27;name&#x27;, &#x27;slug&#x27;, &#x27;public&#x27;);
+ *
+ * @method createCollections
+ * @public
+ * @param {String} name Name
+ * @param {String} slug Slug
+ * @param {Boolean} publicCollection Public Collection
+ */
+
+Ully.prototype.createCollections = function createCollections(name, slug, publicCollection) {
+    this.post(&#x27;collections?:token&#x27;, {
+        name: name,
+        slug: slug,
+        public: publicCollection
+    }, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for update a specific collection
+ *
+ * @example
+ *
+ *     api.updateCollections(&#x27;collectionSlug&#x27;, &#x27;name&#x27;, &#x27;slug&#x27;, &#x27;public&#x27;);
+ *
+ * @method updateCollections
+ * @public
+ * @param {String} collectionSlug Slug
+ * @param {String} name Name
+ * @param {String} slug Slug
+ * @param {Boolean} publicCollection Public Collection
+ */
+
+Ully.prototype.updateCollections = function updateCollections(collectionSlug, name, slug, publicCollection) {
+    var collectionsObj = {
+        name: name,
+        slug: slug,
+        public: publicCollection
+    };
+    _.each(collectionsObj, function (val, key) {
+        if (collectionsObj[key] === &#x27;&#x27;) {
+            delete collectionsObj[key];
+        }
+    });
+    this.put(join(&#x27;collections&#x27;, collectionSlug, &#x27;?:token&#x27;), collectionsObj, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, null, null, res.body.message);
+    });
+};
+
+/**
+ * Method responsible for delete a specific collection
+ *
+ * @example
+ *
+ *     api.deleteCollections(&#x27;collectionSlug&#x27;);
+ *
+ * @method updateCollections
+ * @public
+ * @param {String} collectionSlug Slug
+ */
+
+Ully.prototype.deleteCollections = function deleteCollections(collectionSlug) {
+    this.delete(join(&#x27;collections&#x27;, collectionSlug, &#x27;?:token&#x27;), null, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, null, null, res.body.message);
+    });
+};
+
+/**
+ * Method responsible for create a new url
+ *
+ * @example
+ *
+ *     api.createUrls(&#x27;collectionSlug&#x27;, &#x27;slug&#x27;, &#x27;description&#x27;);
+ *
+ * @method createUrls
+ * @public
+ * @param {String} collectionSlug Collection Slug
+ * @param {String} url Url
+ * @param {String} description Description of url
+ */
+
+Ully.prototype.createUrls = function createUrls(collectionSlug, url, description) {
+    this.post(join(&#x27;collections&#x27;, collectionSlug, &#x27;urls&#x27;, &#x27;?:token&#x27;), {
+        url: url,
+        description: description
+    }, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, res);
+    });
+};
+
+/**
+ * Method responsible for update a specific url
+ *
+ * @example
+ *
+ *     api.updateUrls(&#x27;collectionSlug&#x27;, &#x27;slug&#x27;, &#x27;description&#x27;);
+ *
+ * @method updateUrls
+ * @public
+ * @param {String} collectionSlug Collection Slug
+ * @param {String} urlid Url ID
+ * @param {String} url Url
+ * @param {String} description Description of url
+ */
+
+Ully.prototype.updateUrls = function updateUrls(collectionSlug, urlid, url, description) {
+    var urlsObj = {
+        url: url,
+        description: description
+    };
+    _.each(urlsObj, function (val, key) {
+        if (urlsObj[key] === &#x27;&#x27;) {
+            delete urlsObj[key];
+        }
+    });
+    this.put(join(&#x27;collections&#x27;, collectionSlug, &#x27;urls&#x27;, urlid, &#x27;?:token&#x27;), urlsObj, function (err, res) {
+        if (err) {
+            response(err);
+        }
+        response(null, null, null, res.body.message);
+    });
+};
+
+/**
+ * Method responsible for delete a specific url
+ *
+ * @example
+ *
+ *     api.deleteUrls(&#x27;collectionSlug&#x27;, urlsid);
+ *
+ * @method deleteUrls
+ * @public
+ * @param {String} collectionSlug Slug
+ * @param {String} urlsid Array of urls id
+ */
+
+Ully.prototype.deleteUrls = function deleteUrls(collectionSlug, urlsid) {
+    var self = this;
+    async.eachSeries(urlsid, function (item, cb) {
+        self.delete(join(&#x27;collections&#x27;, collectionSlug, &#x27;urls&#x27;, item, &#x27;?:token&#x27;), null, function (err, res) {
+            if (err) {
+                cb(err);
+            }
+            response(null, null, null, res.body.message);
+            cb(null);
+        });
+    }, function (err) {
+        if (err) {
+            response(err);
+        }
+    });
+};
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

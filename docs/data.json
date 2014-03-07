@@ -1,0 +1,1076 @@
+{
+    "project": {
+        "name": "Ully API",
+        "description": "Ully API: Manage favorite links easily and quickly",
+        "version": "0.1.0",
+        "url": "https://github.com/enytc/ully"
+    },
+    "files": {
+        "lib/helpers.js": {
+            "name": "lib/helpers.js",
+            "modules": {},
+            "classes": {
+                "Helpers": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/ully.js": {
+            "name": "lib/ully.js",
+            "modules": {},
+            "classes": {
+                "Ully": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "Helpers": {
+            "name": "Helpers",
+            "shortname": "Helpers",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "lib/helpers.js",
+            "line": 17
+        },
+        "Ully": {
+            "name": "Ully",
+            "shortname": "Ully",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "lib/ully.js",
+            "line": 53,
+            "is_constructor": 1,
+            "example": [
+                "\n\n    var api = new Ully('access_token');"
+            ],
+            "params": [
+                {
+                    "name": "access_token",
+                    "description": "Access Token",
+                    "type": "String"
+                }
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "lib/helpers.js",
+            "line": 29,
+            "description": "Method responsible for check if path exists",
+            "example": [
+                "\n\n    helpers.exists('./ully');"
+            ],
+            "itemtype": "method",
+            "name": "exists",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "File path of archive",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns true if file exists",
+                "type": "String"
+            },
+            "class": "Helpers"
+        },
+        {
+            "file": "lib/helpers.js",
+            "line": 46,
+            "description": "Method responsible for reading files and get content",
+            "example": [
+                "\n\n    helpers.read('./ully');"
+            ],
+            "itemtype": "method",
+            "name": "read",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "fillepath",
+                    "description": "File path of archive",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns file content",
+                "type": "String"
+            },
+            "class": "Helpers"
+        },
+        {
+            "file": "lib/helpers.js",
+            "line": 64,
+            "description": "Method responsible for writing files",
+            "example": [
+                "\n\n    helpers.write('./ully', 'string data');"
+            ],
+            "itemtype": "method",
+            "name": "write",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "fillepath",
+                    "description": "File path of archive",
+                    "type": "String"
+                },
+                {
+                    "name": "data",
+                    "description": "Data of file",
+                    "type": "String"
+                }
+            ],
+            "class": "Helpers"
+        },
+        {
+            "file": "lib/helpers.js",
+            "line": 82,
+            "description": "Method responsible for demove files",
+            "example": [
+                "\n\n    helpers.remove('./ully');"
+            ],
+            "itemtype": "method",
+            "name": "remove",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "File path of archive",
+                    "type": "String"
+                }
+            ],
+            "class": "Helpers"
+        },
+        {
+            "file": "lib/helpers.js",
+            "line": 98,
+            "description": "Method responsible for demove directories",
+            "example": [
+                "\n\n    helpers.rm('./ully');"
+            ],
+            "itemtype": "method",
+            "name": "rm",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "File path of directory",
+                    "type": "String"
+                }
+            ],
+            "class": "Helpers"
+        },
+        {
+            "file": "lib/helpers.js",
+            "line": 124,
+            "description": "Method responsible for check if path is a file",
+            "example": [
+                "\n\n    helpers.isFile('./ully');"
+            ],
+            "itemtype": "method",
+            "name": "isFile",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "File path of archive",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns true if path is file",
+                "type": "String"
+            },
+            "class": "Helpers"
+        },
+        {
+            "file": "lib/helpers.js",
+            "line": 142,
+            "description": "Method responsible for check if path is a directory",
+            "example": [
+                "\n\n    helpers.isDir('./ully');"
+            ],
+            "itemtype": "method",
+            "name": "isDir",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "File path of archive",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "Returns true if path is directory",
+                "type": "String"
+            },
+            "class": "Helpers"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 113,
+            "description": "Method responsible for asking questions",
+            "example": [
+                "\n\n    api.prompt(prompts, cb);"
+            ],
+            "itemtype": "method",
+            "name": "prompt",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "prompts",
+                    "description": "Array of prompt options",
+                    "type": "Object"
+                },
+                {
+                    "name": "cb",
+                    "description": "A callback",
+                    "type": "Function"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 132,
+            "description": "Method responsible for create accounts",
+            "example": [
+                "\n\n    api.signup('name', 'email', 'username', 'password');"
+            ],
+            "itemtype": "method",
+            "name": "signup",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name",
+                    "type": "String"
+                },
+                {
+                    "name": "email",
+                    "description": "Email",
+                    "type": "String"
+                },
+                {
+                    "name": "username",
+                    "description": "Username",
+                    "type": "String"
+                },
+                {
+                    "name": "password",
+                    "description": "Password",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 161,
+            "description": "Method responsible for login in accounts",
+            "example": [
+                "\n\n    api.login('email', 'username', 'password');"
+            ],
+            "itemtype": "method",
+            "name": "login",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "email",
+                    "description": "Email",
+                    "type": "String"
+                },
+                {
+                    "name": "username",
+                    "description": "Username",
+                    "type": "String"
+                },
+                {
+                    "name": "password",
+                    "description": "Password",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 194,
+            "description": "Method responsible for reset passwords",
+            "example": [
+                "\n\n    api.forgot('email', 'username');"
+            ],
+            "itemtype": "method",
+            "name": "forgot",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "email",
+                    "description": "Email",
+                    "type": "String"
+                },
+                {
+                    "name": "username",
+                    "description": "Username",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 219,
+            "description": "Method responsible for showing stats of Ully",
+            "example": [
+                "\n\n    api.stats();"
+            ],
+            "itemtype": "method",
+            "name": "stats",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 240,
+            "description": "Method responsible for showing stats of a specific user",
+            "example": [
+                "\n\n    api.statsByUserId();"
+            ],
+            "itemtype": "method",
+            "name": "statsByUserId",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userid",
+                    "description": "User ID",
+                    "type": "String"
+                },
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 262,
+            "description": "Method responsible for showing the status of api",
+            "example": [
+                "\n\n    api.status();"
+            ],
+            "itemtype": "method",
+            "name": "status",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 284,
+            "description": "Method responsible for showing profile info",
+            "example": [
+                "\n\n    api.me();"
+            ],
+            "itemtype": "method",
+            "name": "me",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 308,
+            "description": "Method responsible for update profile info",
+            "example": [
+                "\n\n    api.updateMe('name', email', 'username', 'password');"
+            ],
+            "itemtype": "method",
+            "name": "updateMe",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name",
+                    "type": "String"
+                },
+                {
+                    "name": "email",
+                    "description": "Email",
+                    "type": "String"
+                },
+                {
+                    "name": "username",
+                    "description": "Username",
+                    "type": "String"
+                },
+                {
+                    "name": "password",
+                    "description": "Password",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 343,
+            "description": "Method responsible for delete profile info",
+            "example": [
+                "\n\n    api.deleteMe();"
+            ],
+            "itemtype": "method",
+            "name": "deleteMe",
+            "access": "public",
+            "tagname": "",
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 367,
+            "description": "Method responsible for list all users",
+            "example": [
+                "\n\n    api.users();"
+            ],
+            "itemtype": "method",
+            "name": "users",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 388,
+            "description": "Method responsible for showing info of a specific user by username",
+            "example": [
+                "\n\n    api.UsersByUsername();"
+            ],
+            "itemtype": "method",
+            "name": "UsersByUsername",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "username",
+                    "description": "Username",
+                    "type": "String"
+                },
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 410,
+            "description": "Method responsible for showing info of a specific user",
+            "example": [
+                "\n\n    api.usersShow();"
+            ],
+            "itemtype": "method",
+            "name": "usersShow",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userid",
+                    "description": "Username",
+                    "type": "String"
+                },
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 432,
+            "description": "Method responsible for create a new user",
+            "example": [
+                "\n\n    api.createUsers('name', email', 'username', 'password', 'role', 'status');"
+            ],
+            "itemtype": "method",
+            "name": "createUsers",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name",
+                    "type": "String"
+                },
+                {
+                    "name": "email",
+                    "description": "Email",
+                    "type": "String"
+                },
+                {
+                    "name": "username",
+                    "description": "Username",
+                    "type": "String"
+                },
+                {
+                    "name": "password",
+                    "description": "Password",
+                    "type": "String"
+                },
+                {
+                    "name": "role",
+                    "description": "User role",
+                    "type": "String"
+                },
+                {
+                    "name": "status",
+                    "description": "User status",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 465,
+            "description": "Method responsible for update a specific user info",
+            "example": [
+                "\n\n    api.updateUsers('userid', 'name', email', 'username', 'password', 'role', 'status');"
+            ],
+            "itemtype": "method",
+            "name": "updateUsers",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userid",
+                    "description": "User ID",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "Name",
+                    "type": "String"
+                },
+                {
+                    "name": "email",
+                    "description": "Email",
+                    "type": "String"
+                },
+                {
+                    "name": "username",
+                    "description": "Username",
+                    "type": "String"
+                },
+                {
+                    "name": "password",
+                    "description": "Password",
+                    "type": "String"
+                },
+                {
+                    "name": "role",
+                    "description": "User role",
+                    "type": "String"
+                },
+                {
+                    "name": "status",
+                    "description": "User status",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 505,
+            "description": "Method responsible for remove a specific user info",
+            "example": [
+                "\n\n    api.deleteUsers('userid');"
+            ],
+            "itemtype": "method",
+            "name": "deleteUsers",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userid",
+                    "description": "User ID",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 526,
+            "description": "Method responsible for list all collections",
+            "example": [
+                "\n\n    api.moderation();"
+            ],
+            "itemtype": "method",
+            "name": "moderation",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 547,
+            "description": "Method responsible for generate a dinamic list of collections",
+            "example": [
+                "\n\n    api.listCollectionsByUserId();"
+            ],
+            "itemtype": "method",
+            "name": "listCollectionsByUserId",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userid",
+                    "description": "User ID",
+                    "type": "String"
+                },
+                {
+                    "name": "cb",
+                    "description": "A callback",
+                    "type": "Function"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 578,
+            "description": "Method responsible for generate a dinamic list of urls in selected collection",
+            "example": [
+                "\n\n    api.listUrlsOnSelectedCollection();"
+            ],
+            "itemtype": "method",
+            "name": "listUrlsOnSelectedCollection",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userid",
+                    "description": "User ID",
+                    "type": "String"
+                },
+                {
+                    "name": "cb",
+                    "description": "A callback",
+                    "type": "Function"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 611,
+            "description": "Method responsible for list all collections by userid",
+            "example": [
+                "\n\n    api.moderationShowCollectionByUser();"
+            ],
+            "itemtype": "method",
+            "name": "moderationShowCollectionByUser",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userid",
+                    "description": "User ID",
+                    "type": "String"
+                },
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 633,
+            "description": "Method responsible for delete a specific collection",
+            "example": [
+                "\n\n    api.moderationDeleteCollection('userid', 'collection');"
+            ],
+            "itemtype": "method",
+            "name": "moderationDeleteCollection",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userid",
+                    "description": "User ID",
+                    "type": "String"
+                },
+                {
+                    "name": "collection",
+                    "description": "Collection ID",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 655,
+            "description": "Method responsible for delete a specific url in selected collection",
+            "example": [
+                "\n\n    api.moderationDeleteUrl('userid', 'collection', 'urlid');"
+            ],
+            "itemtype": "method",
+            "name": "moderationDeleteUrl",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "userid",
+                    "description": "User ID",
+                    "type": "String"
+                },
+                {
+                    "name": "collection",
+                    "description": "Collection ID",
+                    "type": "String"
+                },
+                {
+                    "name": "urlid",
+                    "description": "Url ID",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 678,
+            "description": "Method responsible for list all collections",
+            "example": [
+                "\n\n    api.collections();"
+            ],
+            "itemtype": "method",
+            "name": "collections",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 704,
+            "description": "Method responsible for list all collections of a specific user",
+            "example": [
+                "\n\n    api.collectionsByUsername();"
+            ],
+            "itemtype": "method",
+            "name": "collectionsByUsername",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "username",
+                    "description": "Username",
+                    "type": "String"
+                },
+                {
+                    "name": "pureJson",
+                    "description": "If true show json raw",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 727,
+            "description": "Method responsible for generate a dinamic list of collections",
+            "example": [
+                "\n\n    api.listCollections();"
+            ],
+            "itemtype": "method",
+            "name": "listCollections",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "cb",
+                    "description": "A callback",
+                    "type": "Function"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 757,
+            "description": "Method responsible for generate a dinamic list of urls",
+            "example": [
+                "\n\n    api.listUrls();"
+            ],
+            "itemtype": "method",
+            "name": "listUrls",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "collection",
+                    "description": "Username",
+                    "type": "String"
+                },
+                {
+                    "name": "cb",
+                    "description": "A callback",
+                    "type": "Function"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 791,
+            "description": "Method responsible for create a new collection",
+            "example": [
+                "\n\n    api.createCollections('name', 'slug', 'public');"
+            ],
+            "itemtype": "method",
+            "name": "createCollections",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "Name",
+                    "type": "String"
+                },
+                {
+                    "name": "slug",
+                    "description": "Slug",
+                    "type": "String"
+                },
+                {
+                    "name": "publicCollection",
+                    "description": "Public Collection",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 818,
+            "description": "Method responsible for update a specific collection",
+            "example": [
+                "\n\n    api.updateCollections('collectionSlug', 'name', 'slug', 'public');"
+            ],
+            "itemtype": "method",
+            "name": "updateCollections",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "collectionSlug",
+                    "description": "Slug",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "Name",
+                    "type": "String"
+                },
+                {
+                    "name": "slug",
+                    "description": "Slug",
+                    "type": "String"
+                },
+                {
+                    "name": "publicCollection",
+                    "description": "Public Collection",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 852,
+            "description": "Method responsible for delete a specific collection",
+            "example": [
+                "\n\n    api.deleteCollections('collectionSlug');"
+            ],
+            "itemtype": "method",
+            "name": "updateCollections",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "collectionSlug",
+                    "description": "Slug",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 873,
+            "description": "Method responsible for create a new url",
+            "example": [
+                "\n\n    api.createUrls('collectionSlug', 'slug', 'description');"
+            ],
+            "itemtype": "method",
+            "name": "createUrls",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "collectionSlug",
+                    "description": "Collection Slug",
+                    "type": "String"
+                },
+                {
+                    "name": "url",
+                    "description": "Url",
+                    "type": "String"
+                },
+                {
+                    "name": "description",
+                    "description": "Description of url",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 899,
+            "description": "Method responsible for update a specific url",
+            "example": [
+                "\n\n    api.updateUrls('collectionSlug', 'slug', 'description');"
+            ],
+            "itemtype": "method",
+            "name": "updateUrls",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "collectionSlug",
+                    "description": "Collection Slug",
+                    "type": "String"
+                },
+                {
+                    "name": "urlid",
+                    "description": "Url ID",
+                    "type": "String"
+                },
+                {
+                    "name": "url",
+                    "description": "Url",
+                    "type": "String"
+                },
+                {
+                    "name": "description",
+                    "description": "Description of url",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        },
+        {
+            "file": "lib/ully.js",
+            "line": 932,
+            "description": "Method responsible for delete a specific url",
+            "example": [
+                "\n\n    api.deleteUrls('collectionSlug', urlsid);"
+            ],
+            "itemtype": "method",
+            "name": "deleteUrls",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "collectionSlug",
+                    "description": "Slug",
+                    "type": "String"
+                },
+                {
+                    "name": "urlsid",
+                    "description": "Array of urls id",
+                    "type": "String"
+                }
+            ],
+            "class": "Ully"
+        }
+    ],
+    "warnings": []
+}

@@ -1,0 +1,10 @@
+{
+    "name": "Ully API",
+    "description": "Ully API: Manage favorite links easily and quickly",
+    "version": "0.1.0",
+    "url": "https://github.com/enytc/ully",
+    "options": {
+        "outdir": "./docs",
+        "paths": "./lib"
+    }
+}

@@ -1,0 +1,10 @@
+npm-debug.log
+node_modules
+examples
+docs
+ullyConfig.json
+.idea
+
+
+# don't ignore .npmignore files
+!.npmignore
