@@ -1,8 +1,8 @@
 {
     "project": {
         "name": "Ully API",
-        "description": "Ully API: Manage favorite links easily and quickly",
-        "version": "0.1.0",
+        "description": "Ully API: Manage your favorite links easily and quickly",
+        "version": "0.2.0",
         "url": "https://github.com/enytc/ully"
     },
     "files": {
@@ -301,11 +301,6 @@
                     "type": "String"
                 },
                 {
-                    "name": "username",
-                    "description": "Username",
-                    "type": "String"
-                },
-                {
                     "name": "password",
                     "description": "Password",
                     "type": "String"
@@ -315,7 +310,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 194,
+            "line": 192,
             "description": "Method responsible for reset passwords",
             "example": [
                 "\n\n    api.forgot('email', 'username');"
@@ -340,7 +335,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 219,
+            "line": 217,
             "description": "Method responsible for showing stats of Ully",
             "example": [
                 "\n\n    api.stats();"
@@ -360,19 +355,19 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 240,
+            "line": 238,
             "description": "Method responsible for showing stats of a specific user",
             "example": [
-                "\n\n    api.statsByUserId();"
+                "\n\n    api.statsByUsername();"
             ],
             "itemtype": "method",
-            "name": "statsByUserId",
+            "name": "statsByUsername",
             "access": "public",
             "tagname": "",
             "params": [
                 {
-                    "name": "userid",
-                    "description": "User ID",
+                    "name": "username",
+                    "description": "Username",
                     "type": "String"
                 },
                 {
@@ -986,7 +981,7 @@
             "line": 873,
             "description": "Method responsible for create a new url",
             "example": [
-                "\n\n    api.createUrls('collectionSlug', 'slug', 'description');"
+                "\n\n    api.createUrls('collectionSlug', 'title', 'url', 'description');"
             ],
             "itemtype": "method",
             "name": "createUrls",
@@ -996,6 +991,11 @@
                 {
                     "name": "collectionSlug",
                     "description": "Collection Slug",
+                    "type": "String"
+                },
+                {
+                    "name": "title",
+                    "description": "Title",
                     "type": "String"
                 },
                 {
@@ -1013,10 +1013,10 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 899,
+            "line": 901,
             "description": "Method responsible for update a specific url",
             "example": [
-                "\n\n    api.updateUrls('collectionSlug', 'slug', 'description');"
+                "\n\n    api.updateUrls('collectionSlug', 'title', 'url', 'description');"
             ],
             "itemtype": "method",
             "name": "updateUrls",
@@ -1034,6 +1034,11 @@
                     "type": "String"
                 },
                 {
+                    "name": "title",
+                    "description": "Title",
+                    "type": "String"
+                },
+                {
                     "name": "url",
                     "description": "Url",
                     "type": "String"
@@ -1048,7 +1053,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 932,
+            "line": 936,
             "description": "Method responsible for delete a specific url",
             "example": [
                 "\n\n    api.deleteUrls('collectionSlug', urlsid);"

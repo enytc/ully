@@ -115,17 +115,13 @@ program
             name: 'email',
             message: 'Enter your email'
         }, {
-            type: 'input',
-            name: 'username',
-            message: 'Enter your username'
-        }, {
             type: 'password',
             name: 'password',
             message: 'Enter your password'
         }];
         //Ask
         ully.prompt(prompts, function (answers) {
-            ully.login(answers.email, answers.username, answers.password);
+            ully.login(answers.email, answers.password);
         });
     });
 
@@ -209,16 +205,16 @@ program
 if (logged) {
     if (isAdmin) {
         /*
-         * Ully StatsByUserId
+         * Ully StatsByUsername
          */
         program
-            .command('stats:user <userid>')
+            .command('stats:user <username>')
             .description('Show statistics of Ully'.white)
-            .action(function (userid) {
+            .action(function (username) {
                 if (program.json) {
-                    ully.statsByUserId(userid, true);
+                    ully.statsByUsername(username, true);
                 } else {
-                    ully.statsByUserId(userid);
+                    ully.statsByUsername(username);
                 }
             });
     }
@@ -733,6 +729,10 @@ if (logged) {
                 ully.prompt(prompts, function (collectionAnswers) {
                     var prompts = [{
                         type: 'input',
+                        name: 'title',
+                        message: 'Enter a title'
+                    }, {
+                        type: 'input',
                         name: 'url',
                         message: 'Enter a url'
                     }, {
@@ -742,7 +742,7 @@ if (logged) {
                     }];
                     //Ask
                     ully.prompt(prompts, function (answers) {
-                        ully.createUrls(collectionAnswers.collection, answers.url, answers.description);
+                        ully.createUrls(collectionAnswers.collection, answers.title, answers.url, answers.description);
                     });
                 });
             });
@@ -781,6 +781,10 @@ if (logged) {
                             choices: urlList
                         }, {
                             type: 'input',
+                            name: 'title',
+                            message: 'Enter a title'
+                        }, {
+                            type: 'input',
                             name: 'url',
                             message: 'Enter a url'
                         }, {
@@ -790,7 +794,7 @@ if (logged) {
                         }];
                         //Ask
                         ully.prompt(prompts, function (answers) {
-                            ully.updateUrls(collectionAnswers.collection, answers.urltoupdate, answers.url, answers.description);
+                            ully.updateUrls(collectionAnswers.collection, answers.urltoupdate, answers.title, answers.url, answers.description);
                         });
                     });
                 });

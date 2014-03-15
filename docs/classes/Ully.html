@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -386,7 +386,7 @@
                             </li>
                         
                             <li class="index-item method public">
-                                <a href="#method_statsByUserId">statsByUserId</a>
+                                <a href="#method_statsByUsername">statsByUsername</a>
 
                                 
                                 
@@ -852,6 +852,12 @@
             
                 <li class="arg">
                     
+                        <code>title</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
                         <code>url</code>
                     
                 </li>
@@ -932,6 +938,22 @@
             
                 <li class="param">
                     
+                        <code class="param-name">title</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Title</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
                         <code class="param-name">url</code>
                         <span class="type">String</span>
                     
@@ -973,7 +995,7 @@
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>api.createUrls(&#39;collectionSlug&#39;, &#39;slug&#39;, &#39;description&#39;);</code></pre>
+                <pre class="code prettyprint"><code>api.createUrls(&#39;collectionSlug&#39;, &#39;title&#39;, &#39;url&#39;, &#39;description&#39;);</code></pre>
 
             </div>
         </div>
@@ -1307,7 +1329,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l932"><code>lib&#x2F;ully.js:932</code></a>
+        <a href="../files/lib_ully.js.html#l936"><code>lib&#x2F;ully.js:936</code></a>
         
         </p>
 
@@ -1529,7 +1551,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l194"><code>lib&#x2F;ully.js:194</code></a>
+        <a href="../files/lib_ully.js.html#l192"><code>lib&#x2F;ully.js:192</code></a>
         
         </p>
 
@@ -2082,12 +2104,6 @@
             
                 <li class="arg">
                     
-                        <code>username</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
                         <code>password</code>
                     
                 </li>
@@ -2154,22 +2170,6 @@
 
                     <div class="param-description">
                         <p>Email</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">username</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Username</p>
 
                     </div>
 
@@ -3131,7 +3131,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l219"><code>lib&#x2F;ully.js:219</code></a>
+        <a href="../files/lib_ully.js.html#l217"><code>lib&#x2F;ully.js:217</code></a>
         
         </p>
 
@@ -3187,8 +3187,8 @@
 </div>
 
                 
-                    <div id="method_statsByUserId" class="method item public">
-    <h3 class="name"><code>statsByUserId</code></h3>
+                    <div id="method_statsByUsername" class="method item public">
+    <h3 class="name"><code>statsByUsername</code></h3>
 
     
         <div class="args">
@@ -3196,7 +3196,7 @@
             
                 <li class="arg">
                     
-                        <code>userid</code>
+                        <code>username</code>
                     
                 </li>
             
@@ -3237,7 +3237,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l240"><code>lib&#x2F;ully.js:240</code></a>
+        <a href="../files/lib_ully.js.html#l238"><code>lib&#x2F;ully.js:238</code></a>
         
         </p>
 
@@ -3260,14 +3260,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">userid</code>
+                        <code class="param-name">username</code>
                         <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>User ID</p>
+                        <p>Username</p>
 
                     </div>
 
@@ -3301,7 +3301,7 @@
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>api.statsByUserId();</code></pre>
+                <pre class="code prettyprint"><code>api.statsByUsername();</code></pre>
 
             </div>
         </div>
@@ -3862,6 +3862,12 @@
             
                 <li class="arg">
                     
+                        <code>title</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
                         <code>url</code>
                     
                 </li>
@@ -3903,7 +3909,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l899"><code>lib&#x2F;ully.js:899</code></a>
+        <a href="../files/lib_ully.js.html#l901"><code>lib&#x2F;ully.js:901</code></a>
         
         </p>
 
@@ -3958,6 +3964,22 @@
             
                 <li class="param">
                     
+                        <code class="param-name">title</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Title</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
                         <code class="param-name">url</code>
                         <span class="type">String</span>
                     
@@ -3999,7 +4021,7 @@
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>api.updateUrls(&#39;collectionSlug&#39;, &#39;slug&#39;, &#39;description&#39;);</code></pre>
+                <pre class="code prettyprint"><code>api.updateUrls(&#39;collectionSlug&#39;, &#39;title&#39;, &#39;url&#39;, &#39;description&#39;);</code></pre>
 
             </div>
         </div>

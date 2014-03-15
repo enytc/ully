@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
+            <em>API Docs for: 0.2.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -258,14 +258,12 @@ Ully.prototype.signup = function signup(name, email, username, password) {
  * @method login
  * @public
  * @param {String} email Email
- * @param {String} username Username
  * @param {String} password Password
  */
 
-Ully.prototype.login = function login(email, username, password) {
+Ully.prototype.login = function login(email, password) {
     this.post(&#x27;forgot/token&#x27;, {
         email: email,
-        username: username,
         password: password
     }, function (err, res) {
         if (err) {
@@ -332,19 +330,21 @@ Ully.prototype.stats = function stats(pureJson) {
  *
  * @example
  *
- *     api.statsByUserId();
+ *     api.statsByUsername();
  *
- * @method statsByUserId
+ * @method statsByUsername
  * @public
- * @param {String} userid User ID
+ * @param {String} username Username
  * @param {Boolean} pureJson If true show json raw
  */
 
-Ully.prototype.statsByUserId = function statsByUserId(userid, pureJson) {
-    this.get(join(&#x27;stats&#x27;, userid, &#x27;?:token&#x27;), function (err, res) {
+Ully.prototype.statsByUsername = function statsByUsername(username, pureJson) {
+    this.get(join(&#x27;stats&#x27;, username, &#x27;?:token&#x27;), function (err, res) {
         if (err) {
             response(err);
         }
+        //Delete user info
+        delete res.body.user;
         response(null, res, pureJson);
     });
 };
@@ -805,7 +805,7 @@ Ully.prototype.collections = function collections(pureJson) {
  */
 
 Ully.prototype.collectionsByUsername = function collectionsByUsername(username, pureJson) {
-    this.get(join(username, &#x27;collections&#x27;, &#x27;?fields=name,slug,urls,public&amp;:token&#x27;), function (err, res) {
+    this.get(join(&#x27;collections&#x27;, &#x27;of&#x27;, username, &#x27;?fields=name,slug,urls,public&amp;:token&#x27;), function (err, res) {
         if (err) {
             response(err);
         }
@@ -965,17 +965,19 @@ Ully.prototype.deleteCollections = function deleteCollections(collectionSlug) {
  *
  * @example
  *
- *     api.createUrls(&#x27;collectionSlug&#x27;, &#x27;slug&#x27;, &#x27;description&#x27;);
+ *     api.createUrls(&#x27;collectionSlug&#x27;, &#x27;title&#x27;, &#x27;url&#x27;, &#x27;description&#x27;);
  *
  * @method createUrls
  * @public
  * @param {String} collectionSlug Collection Slug
+ * @param {String} title Title
  * @param {String} url Url
  * @param {String} description Description of url
  */
 
-Ully.prototype.createUrls = function createUrls(collectionSlug, url, description) {
+Ully.prototype.createUrls = function createUrls(collectionSlug, title, url, description) {
     this.post(join(&#x27;collections&#x27;, collectionSlug, &#x27;urls&#x27;, &#x27;?:token&#x27;), {
+        title: title,
         url: url,
         description: description
     }, function (err, res) {
@@ -991,18 +993,20 @@ Ully.prototype.createUrls = function createUrls(collectionSlug, url, description
  *
  * @example
  *
- *     api.updateUrls(&#x27;collectionSlug&#x27;, &#x27;slug&#x27;, &#x27;description&#x27;);
+ *     api.updateUrls(&#x27;collectionSlug&#x27;, &#x27;title&#x27;, &#x27;url&#x27;, &#x27;description&#x27;);
  *
  * @method updateUrls
  * @public
  * @param {String} collectionSlug Collection Slug
  * @param {String} urlid Url ID
+ * @param {String} title Title
  * @param {String} url Url
  * @param {String} description Description of url
  */
 
-Ully.prototype.updateUrls = function updateUrls(collectionSlug, urlid, url, description) {
+Ully.prototype.updateUrls = function updateUrls(collectionSlug, urlid, title, url, description) {
     var urlsObj = {
+        title: title,
         url: url,
         description: description
     };

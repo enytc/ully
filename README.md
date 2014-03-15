@@ -1,6 +1,6 @@
 # Ully [![Build Status](https://secure.travis-ci.org/enytc/ully.png?branch=master)](http://travis-ci.org/enytc/ully) [![NPM version](https://badge-me.herokuapp.com/api/npm/ully.png)](http://badges.enytc.com/for/npm/ully) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/enytc/ully/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
-> Manage favorite links easily and quickly
+> Manage your favorite links easily and quickly
 
 ## Getting Started
 Install the module with: `npm install -g ully`
@@ -96,17 +96,12 @@ How to use this method
 api.signup('myname', 'email', 'myusername', '123456test');
 ```
 
-#### .login(email, username, password)
+#### .login(email, password)
 
 
 **Parameter**: `email`
 **Type**: `String`
 **Example**: `example@example.com`
-
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
 
 
 **Parameter**: `password`
@@ -120,7 +115,7 @@ How to use this method
 
 ```javascript
 
-api.login('email', 'myusername', '123456test');
+api.login('email', '123456test');
 ```
 
 #### .forgot(email, username)
@@ -342,11 +337,15 @@ How to use this method
 api.deleteCollections('collectionSlug');
 ```
 
-#### .createUrls(collectionSlug, url, description)
+#### .createUrls(collectionSlug, title, url, description)
 
 **Parameter**: `collectionSlug`
 **Type**: `String`
 **Example**: `favorites`
+
+**Parameter**: `title`
+**Type**: `String`
+**Example**: `Title of url`
 
 **Parameter**: `url`
 **Type**: `String`
@@ -363,10 +362,10 @@ How to use this method
 
 ```javascript
 
-api.createUrls('collectionSlug', 'http://example.com', 'My example page');
+api.createUrls('collectionSlug', 'Title of url', 'http://example.com', 'My example page');
 ```
 
-#### .updateUrls(collectionSlug, urlid, url, description)
+#### .updateUrls(collectionSlug, urlid, title, url, description)
 
 **Parameter**: `collectionSlug`
 **Type**: `String`
@@ -375,6 +374,10 @@ api.createUrls('collectionSlug', 'http://example.com', 'My example page');
 **Parameter**: `urlid`
 **Type**: `String`
 **Example**: `urlid`
+
+**Parameter**: `title`
+**Type**: `String`
+**Example**: `Title of url`
 
 **Parameter**: `url`
 **Type**: `String`
@@ -391,7 +394,7 @@ How to use this method
 
 ```javascript
 
-api.updateUrls('collectionSlug', 'urlid', 'http://example.com', 'My example page');
+api.updateUrls('collectionSlug', 'urlid', 'Title of url', 'http://example.com', 'My example page');
 ```
 
 #### .deleteUrls(collectionSlug, urlid)
