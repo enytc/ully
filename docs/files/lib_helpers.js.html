@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.0</em>
+            <em>API Docs for: 0.3.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -90,10 +90,10 @@
     <pre class="code prettyprint linenums">
 /*
  * ully
- * https://github.com/chrisenytc/ully
+ * https://github.com/enytc/ully
  *
- * Copyright (c) 2014 Christopher EnyTC
- * Licensed under the MIT license.
+ * Copyright (c) 2014, EnyTC Corporation
+ * Licensed under the BSD license.
  */
 
 &#x27;use strict&#x27;;
@@ -199,7 +199,7 @@ exports.remove = function remove(path) {
 
 exports.rm = function rm(path) {
     if (fs.existsSync(path)) {
-        fs.readdirSync(path).forEach(function (file) {
+        fs.readdirSync(path).forEach(function(file) {
             var curPath = path + &#x27;/&#x27; + file;
             if (fs.statSync(curPath).isDirectory()) { // recurse
                 exports.rm(curPath);

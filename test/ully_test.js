@@ -2,7 +2,7 @@
  * ully
  * https://github.com/enytc/ully
  *
- * Copyright (c) 2014 Christopher EnyTC
+ * Copyright (c) 2014, EnyTC Corporation
  * Licensed under the BSD license.
  */
 
@@ -19,14 +19,14 @@ chai.should();
 var Ully = require('../lib/ully.js');
 var ully = new Ully('token');
 
-describe('ully module', function () {
-    describe('#constructor()', function () {
-        it('should be a function', function () {
+describe('ully module', function() {
+    describe('#constructor()', function() {
+        it('should be a function', function() {
             Ully.should.be.a("function");
         });
     });
-    describe('#instance()', function () {
-        it('should be a object', function () {
+    describe('#instance()', function() {
+        it('should be a object', function() {
             ully.should.be.a("object");
         });
     });

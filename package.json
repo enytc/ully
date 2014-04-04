@@ -1,7 +1,7 @@
 {
     "name": "ully",
     "description": "Manage your favorite links easily and quickly",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "homepage": "https://github.com/enytc/ully",
     "author": {
         "name": "Christopher EnyTC",
@@ -47,5 +47,5 @@
         "gulp-mocha": "~0.4.1",
         "jshint-stylish": "~0.1.5"
     },
-    "keywords": ["favorite", "links", "link", "urls", "url", "manager", "easy", "api", "cli"]
+    "keywords": ["ully", "bookmark", "manager", "favorites", "links", "link", "urls", "url", "easy", "api", "cli"]
 }

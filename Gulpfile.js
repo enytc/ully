@@ -2,7 +2,7 @@
  * ully
  * https://github.com/enytc/ully
  *
- * Copyright (c) 2014 Christopher EnyTC
+ * Copyright (c) 2014, EnyTC Corporation
  * Licensed under the BSD license.
  */
 
@@ -13,7 +13,7 @@ var jshint = require('gulp-jshint');
 var mocha = require('gulp-mocha');
 var stylish = require('jshint-stylish');
 
-gulp.task('jshint', function () {
+gulp.task('jshint', function() {
     // Minify and copy all JavaScript (except vendor scripts)
     return gulp.src(['./lib/**/*.js', './test/**/*.js'])
         .pipe(jshint())
@@ -21,7 +21,7 @@ gulp.task('jshint', function () {
 });
 
 // Copy all static images
-gulp.task('mocha', function () {
+gulp.task('mocha', function() {
     return gulp.src('./test/*.js')
         .pipe(mocha({
             globals: ['chai'],
@@ -33,12 +33,12 @@ gulp.task('mocha', function () {
 });
 
 // Rerun the task when a file changes
-gulp.task('watch', function () {
+gulp.task('watch', function() {
     gulp.watch(['./lib/**/*.js', './test/**/*.js'], ['jshint']);
 });
 
-gulp.task('test', function () {
-    gulp.run('mocha', function () {});
+gulp.task('test', function() {
+    gulp.run('mocha', function() {});
 });
 
 // The default task (called when you run `gulp` from cli)

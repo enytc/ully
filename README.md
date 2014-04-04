@@ -3,7 +3,12 @@
 > Manage your favorite links easily and quickly
 
 ## Getting Started
-Install the module with: `npm install -g ully`
+
+Install the module with: 
+
+```bash
+$ npm install -g ully
+```
 
 ```javascript
 var Ully = require('ully');
@@ -13,59 +18,199 @@ var api = new Ully('access_token');
 
 ## Documentation
 
-#### .prompt(prompts, cb)
+#### .signup(name, email, username, password, callback)
 
-**Parameter**: `prompts`
-**Type**: `Array`
-**Example**: 
+**Parameter**: `name`
+**Type**: `String`
+**Example**: `myname`
 
-```javascript
-var prompts = [
-{
-	type: 'input',
-	name: 'name',
-	message: 'What\'s your name?'
-}, 
-{
-	type: 'input',
-	name: 'email',
-	message: 'What\'s your email?'
-}];
-```
 
-**Parameter**: `cb`
+**Parameter**: `email`
+**Type**: `String`
+**Example**: `example@example.com`
+
+
+**Parameter**: `username`
+**Type**: `String`
+**Example**: `myusername`
+
+
+**Parameter**: `password`
+**Type**: `String`
+**Example**: `123456test`
+
+
+**Parameter**: `callback`
 **Type**: `Function`
-**Example**:
-
+**Example**: 
 ```javascript
-function(answers) {
-	
+function(err, data) {
+    
 }
 ```
 
-The 'prompt' method is responsible for asking questions
+The `signup` method is responsible for create accounts
 
 How to use this method
 
 ```javascript
-var prompts = [
-{
-	type: 'input',
-	name: 'name',
-	message: 'What\'s your name?'
-}, 
-{
-	type: 'input',
-	name: 'email',
-	message: 'What\'s your email?'
-}];
-
-api.prompt(prompts, function(answers) {
-	console.log(answers);
-}); 
+api.signup('myname', 'email', 'myusername', '123456test', function(err, data) {
+    console.log(data);
+});
 ```
 
-#### .signup(name, email, username, password)
+#### .login(email, password, callback)
+
+**Parameter**: `email`
+**Type**: `String`
+**Example**: `example@example.com`
+
+
+**Parameter**: `password`
+**Type**: `String`
+**Example**: `123456test`
+
+
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `login` method is responsible to login in accounts
+
+How to use this method
+
+```javascript
+api.login('email', '123456test', function(err, data) {
+    console.log(data);
+});
+```
+
+#### .forgot(email, username, callback)
+
+**Parameter**: `email`
+**Type**: `String`
+**Example**: `example@example.com`
+
+
+**Parameter**: `username`
+**Type**: `String`
+**Example**: `myusername`
+
+
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `forgot` method is responsible for reset passwords
+
+How to use this method
+
+```javascript
+api.forgot('example@example.com', 'myusername', function(err, data) {
+    console.log(data);
+});
+```
+
+#### .stats(callback)
+
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `stats` method is responsible for showing statistics of Ully
+
+How to use this method
+
+```javascript
+api.stats(function(err, data) {
+    console.log(data);
+});
+```
+
+#### .statsByUsername(username, callback)
+
+**Parameter**: `username`
+**Type**: `String`
+**Example**: `myusername`
+
+
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `statsByUsername` method is responsible for showing statistics of Ully
+
+How to use this method
+
+```javascript
+api.stats('myusername', function(err, data) {
+    console.log(data);
+});
+```
+
+#### .status(callback)
+
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `status` method is responsible for showing status of the api
+
+How to use this method
+
+```javascript
+api.status(function(err, data) {
+    console.log(data);
+});
+```
+
+#### .me(callback)
+
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `me` method is responsible for showing profile info
+
+How to use this method
+
+```javascript
+api.me(function(err, data) {
+    console.log(data);
+});
+```
+
+#### .updateMe(name, email, username, currentPassword, password, callback)
 
 **Parameter**: `name`
 **Type**: `String`
@@ -82,26 +227,9 @@ api.prompt(prompts, function(answers) {
 **Example**: `myusername`
 
 
-**Parameter**: `password`
+**Parameter**: `currentPassword`
 **Type**: `String`
 **Example**: `123456test`
-
-
-The 'signup' method is responsible for create accounts
-
-How to use this method
-
-```javascript
-
-api.signup('myname', 'email', 'myusername', '123456test');
-```
-
-#### .login(email, password)
-
-
-**Parameter**: `email`
-**Type**: `String`
-**Example**: `example@example.com`
 
 
 **Parameter**: `password`
@@ -109,315 +237,321 @@ api.signup('myname', 'email', 'myusername', '123456test');
 **Example**: `123456test`
 
 
-The 'login' method is responsible to login in accounts
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `updateMe` method is responsible for update profile info
 
 How to use this method
 
 ```javascript
-
-api.login('email', '123456test');
+api.updateMe('myname', 'email', 'myusername', '123456test', '123456test', function(err, data) {
+    console.log(data);
+});
 ```
 
-#### .forgot(email, username)
+#### .deleteMe(callback)
 
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
 
-**Parameter**: `email`
-**Type**: `String`
-**Example**: `example@example.com`
+The `deleteMe` method is responsible for delete profile info
 
+How to use this method
+
+```javascript
+api.deleteMe(function(err, data) {
+    console.log(data);
+});
+```
+
+#### .collections(callback)
+
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `collections` method is responsible for list all collections
+
+How to use this method
+
+```javascript
+api.collections(function(err, data) {
+    console.log(data);
+});
+```
+
+#### .collectionsByUsername(username, callback)
 
 **Parameter**: `username`
 **Type**: `String`
 **Example**: `myusername`
 
 
-The 'forgot' method is responsible for reset passwords
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `collectionsByUsername` method is responsible for list all collections of a specific user
 
 How to use this method
 
 ```javascript
-
-api.stats(true);
+api.collectionsByUsername('username', function(err, data) {
+    console.log(data);
+});
 ```
 
-#### .stats(pureJson)
-
-
-**Parameter**: `pureJson`
-**Type**: `Boolean`
-**Example**: `true`
-
-
-The 'stats' method is responsible for showing statistics of Ully
-
-How to use this method
-
-```javascript
-
-api.stats(true);
-```
-
-#### .status(pureJson)
-
-
-**Parameter**: `pureJson`
-**Type**: `Boolean`
-**Example**: `true`
-
-
-The 'status' method is responsible for showing status of the api
-
-How to use this method
-
-```javascript
-
-api.status(true);
-```
-
-#### .me(pureJson)
-
-
-**Parameter**: `pureJson`
-**Type**: `Boolean`
-**Example**: `true`
-
-
-The 'me' method is responsible for showing profile info
-
-How to use this method
-
-```javascript
-
-api.me(true);
-```
-
-#### .updateMe(name, email, username, password)
-
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `myname`
-
-
-**Parameter**: `email`
-**Type**: `String`
-**Example**: `example@example.com`
-
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
-
-
-**Parameter**: `password`
-**Type**: `String`
-**Example**: `123456test`
-
-The 'updateMe' method is responsible for update profile info
-
-How to use this method
-
-```javascript
-
-api.updateMe('myname', 'email', 'myusername', '123456test');
-```
-
-#### .deleteMe()
-
-The 'deleteMe' method is responsible for delete profile info
-
-How to use this method
-
-```javascript
-
-api.deleteMe();
-```
-
-#### .collections(pureJson)
-
-
-**Parameter**: `pureJson`
-**Type**: `Boolean`
-**Example**: `true`
-
-
-The 'collections' method is responsible for list all collections
-
-How to use this method
-
-```javascript
-
-api.collections(true);
-```
-
-#### .collectionsByUsername(username, pureJson)
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
-
-**Parameter**: `pureJson`
-**Type**: `Boolean`
-**Example**: `true`
-
-
-The 'collectionsByUsername' method is responsible for list all collections of a specific user
-
-How to use this method
-
-```javascript
-
-api.collectionsByUsername('username', true);
-```
-
-#### .createCollections(name, slug, publicCollection)
+#### .createCollections(name, slug, publicCollection, callback)
 
 **Parameter**: `name`
 **Type**: `String`
 **Example**: `My Favorites`
 
+
 **Parameter**: `slug`
 **Type**: `String`
 **Example**: `favorites`
+
 
 **Parameter**: `publicCollection`
 **Type**: `Boolean`
 **Example**: `true`
 
 
-The 'createCollections' method is responsible for create a new collection
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `createCollections` method is responsible for create a new collection
 
 How to use this method
 
 ```javascript
-
-api.createCollections('name', 'slug', true);
+api.createCollections('name', 'slug', true, function(err, data) {
+    console.log(data);
+});
 ```
 
-#### .updateCollections(collectionSlug, name, slug, publicCollection)
+#### .updateCollections(collectionSlug, name, slug, publicCollection, callback)
 
 **Parameter**: `collectionSlug`
 **Type**: `String`
 **Example**: `favorites`
 
+
 **Parameter**: `name`
 **Type**: `String`
 **Example**: `My Favorites`
+
 
 **Parameter**: `slug`
 **Type**: `String`
 **Example**: `myfavorites`
 
+
 **Parameter**: `publicCollection`
 **Type**: `Boolean`
 **Example**: `true`
 
 
-The 'updateCollections' method is responsible for update a specific collection
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `updateCollections` method is responsible for update a specific collection
 
 How to use this method
 
 ```javascript
-
-api.updateCollections('collectionSlug', 'name', 'slug', true);
+api.updateCollections('collectionSlug', 'name', 'slug', true, function(err, data) {
+    console.log(data);
+});
 ```
 
-#### .deleteCollections(collectionSlug)
+#### .deleteCollections(collectionSlug, callback)
 
 **Parameter**: `collectionSlug`
 **Type**: `String`
 **Example**: `favorites`
 
 
-The 'deleteCollections' method is responsible for delete a specific collection
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `deleteCollections` method is responsible for delete a specific collection
 
 How to use this method
 
 ```javascript
-
-api.deleteCollections('collectionSlug');
+api.deleteCollections('collectionSlug', function(err, data) {
+    console.log(data);
+});
 ```
 
-#### .createUrls(collectionSlug, title, url, description)
+#### .createUrls(collectionSlug, url, title, description, callback)
 
 **Parameter**: `collectionSlug`
 **Type**: `String`
 **Example**: `favorites`
+
+
+**Parameter**: `url`
+**Type**: `String`
+**Example**: `http://example.com`
+
 
 **Parameter**: `title`
 **Type**: `String`
 **Example**: `Title of url`
 
-**Parameter**: `url`
-**Type**: `String`
-**Example**: `http://example.com`
 
 **Parameter**: `description`
 **Type**: `String`
 **Example**: `My example page`
 
 
-The 'createUrls' method is responsible for create a new url
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `createUrls` method is responsible for create a new url
 
 How to use this method
 
 ```javascript
-
-api.createUrls('collectionSlug', 'Title of url', 'http://example.com', 'My example page');
+api.createUrls('collectionSlug', 'http://example.com', 'Title of url', 'My example page', function(err, data) {
+    console.log(data);
+});
 ```
 
-#### .updateUrls(collectionSlug, urlid, title, url, description)
+#### .updateUrls(collectionSlug, urlID, url, title, description, callback)
 
 **Parameter**: `collectionSlug`
 **Type**: `String`
 **Example**: `favorites`
 
-**Parameter**: `urlid`
+
+**Parameter**: `urlID`
 **Type**: `String`
-**Example**: `urlid`
+**Example**: `urlID`
+
+
+**Parameter**: `url`
+**Type**: `String`
+**Example**: `http://example.com`
+
 
 **Parameter**: `title`
 **Type**: `String`
 **Example**: `Title of url`
 
-**Parameter**: `url`
-**Type**: `String`
-**Example**: `http://example.com`
 
 **Parameter**: `description`
 **Type**: `String`
 **Example**: `My example page`
 
 
-The 'updateUrls' method is responsible for update a specific url
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `updateUrls` method is responsible for update a specific url
 
 How to use this method
 
 ```javascript
-
-api.updateUrls('collectionSlug', 'urlid', 'Title of url', 'http://example.com', 'My example page');
+api.updateUrls('collectionSlug', 'urlID', 'http://example.com', 'Title of url', 'My example page', function(err, data) {
+    console.log(data);
+});
 ```
 
-#### .deleteUrls(collectionSlug, urlid)
+#### .deleteUrls(collectionSlug, urlID, callback)
 
 **Parameter**: `collectionSlug`
 **Type**: `String`
 **Example**: `favorites`
 
-**Parameter**: `urlid`
+
+**Parameter**: `urlID`
 **Type**: `String`
-**Example**: `urlid`
+**Example**: `urlID`
 
 
-The 'deleteUrls' method is responsible for delete a specific url
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
+
+The `deleteUrls` method is responsible for delete a specific url
 
 How to use this method
 
 ```javascript
-
-api.deleteUrls('collectionSlug', 'urlid');
+api.deleteUrls('collectionSlug', 'urlID', function(err, data) {
+    console.log(data);
+});
 ```
 
 ## Contributing
+
+1. Fork it [enytc/ully](https://github.com/enytc/ully/fork)
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am "Add some feature"`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
 See the [CONTRIBUTING Guidelines](CONTRIBUTING.md)
 

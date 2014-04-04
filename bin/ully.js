@@ -4,7 +4,7 @@
  * ully
  * https://github.com/enytc/ully
  *
- * Copyright (c) 2014 Christopher EnyTC
+ * Copyright (c) 2014, Christopher EnyTC
  * Licensed under the BSD license.
  */
 
@@ -12,26 +12,22 @@
  * Module dependencies.
  */
 
-var program = require('commander');
-var updateNotifier = require('update-notifier');
-var Insight = require('insight');
-var banner = require('../lib/banner.js');
-var Ully = require('..');
-var ully;
-var logged = false;
-var isAdmin = false;
-var path = require('path');
-var h = require('../lib/helpers.js');
-var debug = require('../lib/debugger.js');
-var pkg = require('../package.json');
-var configPath = path.join(__dirname, '..', 'lib', 'ullyConfig.json');
+var program = require('commander'),
+    updateNotifier = require('update-notifier'),
+    Insight = require('insight'),
+    pj = require('prettyjson').render,
+    banner = require('../lib/banner.js'),
+    Ully = require('..'),
+    ully,
+    logged = false,
+    isAdmin = false,
+    path = require('path'),
+    h = require('../lib/helpers.js'),
+    debug = require('../lib/debugger.js'),
+    pkg = require('../package.json'),
+    configPath = path.join(__dirname, '..', 'lib', 'ullyConfig.json');
+
 require('colors');
-
-/*
- * Ully Banner
- */
-
-banner();
 
 /*
  * Ully Insight
@@ -42,6 +38,31 @@ var insight = new Insight({
     packageName: pkg.name,
     packageVersion: pkg.version
 });
+
+/*
+ * Ully Response
+ */
+
+function response(err, res, pureJson, message, type) {
+    if (err) {
+        throw err;
+    }
+    if (res) {
+        if (!pureJson) {
+            console.log('\n[ ' + 'Response'.green.bold + ' ] ==> ');
+            console.log();
+            console.log(pj(res));
+        } else {
+            console.log(JSON.stringify(res, null, 4));
+        }
+    }
+    if (message && type) {
+        debug(message, type);
+    }
+    if (message && !type) {
+        debug(message);
+    }
+}
 
 /*
  * Ully Bootstrap
@@ -78,7 +99,7 @@ program
 program
     .command('signup')
     .description('Create your Ully account'.white)
-    .action(function () {
+    .action(function() {
         var prompts = [{
             type: 'input',
             name: 'name',
@@ -97,8 +118,13 @@ program
             message: 'Enter your password'
         }];
         //Ask
-        ully.prompt(prompts, function (answers) {
-            ully.signup(answers.name, answers.email, answers.username, answers.password);
+        ully.prompt(prompts, function(answers) {
+            ully.signup(answers.name, answers.email, answers.username, answers.password, function(err, data) {
+                if (err) {
+                    return response(err, data);
+                }
+                return response(null, data);
+            });
         });
     });
 
@@ -109,7 +135,7 @@ program
 program
     .command('login')
     .description('Login in your Ully account'.white)
-    .action(function () {
+    .action(function() {
         var prompts = [{
             type: 'input',
             name: 'email',
@@ -120,8 +146,13 @@ program
             message: 'Enter your password'
         }];
         //Ask
-        ully.prompt(prompts, function (answers) {
-            ully.login(answers.email, answers.password);
+        ully.prompt(prompts, function(answers) {
+            ully.login(answers.email, answers.password, function(err, data) {
+                if (err) {
+                    return response(err, data);
+                }
+                return response(null, data);
+            });
         });
     });
 
@@ -132,7 +163,7 @@ program
 program
     .command('forgot')
     .description('Reset your password'.white)
-    .action(function () {
+    .action(function() {
         var prompts = [{
             type: 'input',
             name: 'email',
@@ -143,8 +174,13 @@ program
             message: 'Enter your username'
         }];
         //Ask
-        ully.prompt(prompts, function (answers) {
-            ully.forgot(answers.email, answers.username);
+        ully.prompt(prompts, function(answers) {
+            ully.forgot(answers.email, answers.username, function(err, data) {
+                if (err) {
+                    return response(err, data);
+                }
+                return response(null, data);
+            });
         });
     });
 
@@ -155,14 +191,14 @@ program
 program
     .command('logout')
     .description('Logout of your Ully account'.white)
-    .action(function () {
+    .action(function() {
         var prompts = [{
             type: 'confirm',
             name: 'logout',
             message: 'Are you sure you want to logout from your account?'
         }];
         //Ask
-        ully.prompt(prompts, function (answers) {
+        ully.prompt(prompts, function(answers) {
             if (answers.logout) {
                 if (h.exists(configPath)) {
                     h.remove(configPath);
@@ -179,12 +215,13 @@ program
 program
     .command('stats')
     .description('Show statistics of a specific user'.white)
-    .action(function () {
-        if (program.json) {
-            ully.stats(true);
-        } else {
-            ully.stats();
-        }
+    .action(function() {
+        ully.stats(function(err, data) {
+            if (err) {
+                return response(err, data, program.json);
+            }
+            return response(null, data, program.json);
+        });
     });
 
 /*
@@ -194,30 +231,30 @@ program
 program
     .command('status')
     .description('Show status of api'.white)
-    .action(function () {
-        if (program.json) {
-            ully.status(true);
-        } else {
-            ully.status();
-        }
+    .action(function() {
+        ully.status(function(err, data) {
+            if (err) {
+                return response(err, data, program.json);
+            }
+            return response(null, data, program.json);
+        });
     });
 
 if (logged) {
-    if (isAdmin) {
-        /*
-         * Ully StatsByUsername
-         */
-        program
-            .command('stats:user <username>')
-            .description('Show statistics of Ully'.white)
-            .action(function (username) {
-                if (program.json) {
-                    ully.statsByUsername(username, true);
-                } else {
-                    ully.statsByUsername(username);
+    /*
+     * Ully StatsByUsername
+     */
+    program
+        .command('stats:user <username>')
+        .description('Show statistics of Ully'.white)
+        .action(function(username) {
+            ully.statsByUsername(username, function(err, data) {
+                if (err) {
+                    return response(err, data, program.json);
                 }
+                return response(null, data, program.json);
             });
-    }
+        });
 
     /*
      * Ully Me
@@ -225,12 +262,13 @@ if (logged) {
     program
         .command('me')
         .description('Show me profile info'.white)
-        .action(function () {
-            if (program.json) {
-                ully.me(true);
-            } else {
-                ully.me();
-            }
+        .action(function() {
+            ully.me(function(err, data) {
+                if (err) {
+                    return response(err, data, program.json);
+                }
+                return response(null, data, program.json);
+            });
         });
 
     /*
@@ -240,27 +278,36 @@ if (logged) {
     program
         .command('me:update')
         .description('Update your profile info'.white)
-        .action(function () {
+        .action(function() {
             var prompts = [{
                 type: 'input',
                 name: 'name',
-                message: 'Enter a name'
+                message: 'Enter a new name, Leave blank for no change'
             }, {
                 type: 'input',
                 name: 'email',
-                message: 'Enter a email'
+                message: 'Enter a new email, Leave blank for no change'
             }, {
                 type: 'input',
                 name: 'username',
-                message: 'Enter a username'
+                message: 'Enter a new username, Leave blank for no change'
+            }, {
+                type: 'password',
+                name: 'currentpassword',
+                message: 'Enter your current password'
             }, {
                 type: 'password',
                 name: 'password',
-                message: 'Enter a password'
+                message: 'Enter a new password, Leave blank for no change'
             }];
             //Ask
-            ully.prompt(prompts, function (answers) {
-                ully.updateMe(answers.name, answers.email, answers.username, answers.password);
+            ully.prompt(prompts, function(answers) {
+                ully.updateMe(answers.name, answers.email, answers.username, answers.currentpassword, answers.password, function(err, data) {
+                    if (err) {
+                        return response(err, data);
+                    }
+                    return response(null, data);
+                });
             });
         });
 
@@ -271,7 +318,7 @@ if (logged) {
     program
         .command('me:delete')
         .description('Delete your Ully account'.white)
-        .action(function () {
+        .action(function() {
             var prompts = [{
                 type: 'confirm',
                 name: 'delete',
@@ -282,10 +329,15 @@ if (logged) {
                 message: 'Do you confirm the account deletion?'
             }];
             //Ask
-            ully.prompt(prompts, function (answers) {
+            ully.prompt(prompts, function(answers) {
                 if (answers.delete) {
                     if (answers.delete2) {
-                        ully.deleteMe();
+                        ully.deleteMe(function(err, data) {
+                            if (err) {
+                                return response(err, data);
+                            }
+                            return response(null, data);
+                        });
                     }
                 }
             });
@@ -298,12 +350,13 @@ if (logged) {
         program
             .command('users')
             .description('Show all users'.white)
-            .action(function () {
-                if (program.json) {
-                    ully.users(true);
-                } else {
-                    ully.users();
-                }
+            .action(function() {
+                ully.users(function(err, data) {
+                    if (err) {
+                        return response(err, data, program.json);
+                    }
+                    return response(null, data, program.json);
+                });
             });
 
         /*
@@ -312,12 +365,13 @@ if (logged) {
         program
             .command('users:id <username>')
             .description('Get userId by username'.white)
-            .action(function (username) {
-                if (program.json) {
-                    ully.UsersByUsername(username, true);
-                } else {
-                    ully.UsersByUsername(username);
-                }
+            .action(function(username) {
+                ully.UsersByUsername(username, function(err, data) {
+                    if (err) {
+                        return response(err, data, program.json);
+                    }
+                    return response(null, data, program.json);
+                });
             });
 
         /*
@@ -326,12 +380,13 @@ if (logged) {
         program
             .command('users:user <userid>')
             .description('Show a specific user info'.white)
-            .action(function (userid) {
-                if (program.json) {
-                    ully.usersShow(userid, true);
-                } else {
-                    ully.usersShow(userid);
-                }
+            .action(function(userid) {
+                ully.usersShow(userid, function(err, data) {
+                    if (err) {
+                        return response(err, data, program.json);
+                    }
+                    return response(null, data, program.json);
+                });
             });
 
         /*
@@ -341,7 +396,7 @@ if (logged) {
         program
             .command('users:new')
             .description('Create a new user'.white)
-            .action(function () {
+            .action(function() {
                 var prompts = [{
                     type: 'input',
                     name: 'name',
@@ -377,8 +432,13 @@ if (logged) {
                     default: false
                 }];
                 //Ask
-                ully.prompt(prompts, function (answers) {
-                    ully.createUsers(answers.name, answers.email, answers.username, answers.password, answers.role, answers.status);
+                ully.prompt(prompts, function(answers) {
+                    ully.createUsers(answers.name, answers.email, answers.username, answers.password, answers.role, answers.status, function(err, data) {
+                        if (err) {
+                            return response(err, data);
+                        }
+                        return response(null, data);
+                    });
                 });
             });
 
@@ -389,23 +449,23 @@ if (logged) {
         program
             .command('users:update <userid>')
             .description('Update a specific user'.white)
-            .action(function (userid) {
+            .action(function(userid) {
                 var prompts = [{
                     type: 'input',
                     name: 'name',
-                    message: 'Enter a name'
+                    message: 'Enter a new name, Leave blank for no change'
                 }, {
                     type: 'input',
                     name: 'email',
-                    message: 'Enter a email'
+                    message: 'Enter a new email, Leave blank for no change'
                 }, {
                     type: 'input',
                     name: 'username',
-                    message: 'Enter a username'
+                    message: 'Enter a new username, Leave blank for no change'
                 }, {
                     type: 'password',
                     name: 'password',
-                    message: 'Enter a password'
+                    message: 'Enter a new password, Leave blank for no change'
                 }, {
                     type: "list",
                     message: "Choose a user role",
@@ -425,8 +485,13 @@ if (logged) {
                     default: false
                 }];
                 //Ask
-                ully.prompt(prompts, function (answers) {
-                    ully.updateUsers(userid, answers.name, answers.email, answers.username, answers.password, answers.role, answers.status);
+                ully.prompt(prompts, function(answers) {
+                    ully.updateUsers(userid, answers.name, answers.email, answers.username, answers.password, answers.role, answers.status, function(err, data) {
+                        if (err) {
+                            return response(err, data);
+                        }
+                        return response(null, data);
+                    });
                 });
             });
 
@@ -437,7 +502,7 @@ if (logged) {
         program
             .command('users:delete <userid>')
             .description('Delete a specific user'.white)
-            .action(function (userid) {
+            .action(function(userid) {
                 var prompts = [{
                     type: 'confirm',
                     name: 'delete',
@@ -448,10 +513,15 @@ if (logged) {
                     message: 'Do you confirm the account deletion?'
                 }];
                 //Ask
-                ully.prompt(prompts, function (answers) {
+                ully.prompt(prompts, function(answers) {
                     if (answers.delete) {
                         if (answers.delete2) {
-                            ully.deleteUsers(userid);
+                            ully.deleteUsers(userid, function(err, data) {
+                                if (err) {
+                                    return response(err, data);
+                                }
+                                return response(null, data);
+                            });
                         }
                     }
                 });
@@ -463,12 +533,13 @@ if (logged) {
         program
             .command('mod')
             .description('Moderate collections'.white)
-            .action(function () {
-                if (program.json) {
-                    ully.moderation(true);
-                } else {
-                    ully.moderation();
-                }
+            .action(function() {
+                ully.moderation(function(err, data) {
+                    if (err) {
+                        return response(err, data, program.json);
+                    }
+                    return response(null, data, program.json);
+                });
             });
 
         /*
@@ -477,14 +548,14 @@ if (logged) {
         program
             .command('mod:info <userid>')
             .description('Show info of a specific collection'.white)
-            .action(function (userid) {
-                ully.listCollectionsByUserId(userid, function (list) {
+            .action(function(userid) {
+                ully.listCollectionsByUserId(userid, function(list) {
                     if (list.length < 1) {
-                        console.log(' You don\'t have collections. \n Create your first collection.\n' + '\n $ ully collections:new'.bold.white);
+                        console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
                         process.exit();
                     }
                     if (list.length < 1) {
-                        console.log(' You don\'t have collections. \n Create your first collection.\n' + '\n $ ully collections:new'.bold.white);
+                        console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
                         process.exit();
                     }
                     var prompts = [{
@@ -494,8 +565,13 @@ if (logged) {
                         choices: list
                     }];
                     //Ask
-                    ully.prompt(prompts, function (answers) {
-                        ully.moderationShowCollectionByUser(userid, answers.collection);
+                    ully.prompt(prompts, function(answers) {
+                        ully.moderationShowCollectionByUser(userid, answers.collection, function(err, data) {
+                            if (err) {
+                                return response(err, data);
+                            }
+                            return response(null, data);
+                        });
                     });
                 });
             });
@@ -506,10 +582,10 @@ if (logged) {
         program
             .command('mod:delete <userid>')
             .description('Delete a specific collection'.white)
-            .action(function (userid) {
-                ully.listCollectionsByUserId(userid, function (list) {
+            .action(function(userid) {
+                ully.listCollectionsByUserId(userid, function(list) {
                     if (list.length < 1) {
-                        console.log(' You don\'t have collections. \n Create your first collection.\n' + '\n $ ully collections:new'.bold.white);
+                        console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
                         process.exit();
                     }
                     var prompts = [{
@@ -523,9 +599,14 @@ if (logged) {
                         message: 'Are you sure you want to delete this collection?'
                     }];
                     //Ask
-                    ully.prompt(prompts, function (answers) {
+                    ully.prompt(prompts, function(answers) {
                         if (answers.delete) {
-                            ully.moderationDeleteCollection(userid, answers.collection);
+                            ully.moderationDeleteCollection(userid, answers.collection, function(err, data) {
+                                if (err) {
+                                    return response(err, data);
+                                }
+                                return response(null, data);
+                            });
                         }
                     });
                 });
@@ -537,10 +618,10 @@ if (logged) {
         program
             .command('mod:deleteurl <userid>')
             .description('Delete a specific url in selected collection'.white)
-            .action(function (userid) {
-                ully.listCollectionsByUserId(userid, function (list) {
+            .action(function(userid) {
+                ully.listCollectionsByUserId(userid, function(list) {
                     if (list.length < 1) {
-                        console.log(' You don\'t have collections. \n Create your first collection.\n' + '\n $ ully collections:new'.bold.white);
+                        console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
                         process.exit();
                     }
                     var prompts = [{
@@ -550,8 +631,8 @@ if (logged) {
                         choices: list
                     }];
                     //Ask
-                    ully.prompt(prompts, function (answers) {
-                        ully.listUrlsOnSelectedCollection(userid, function (urllist) {
+                    ully.prompt(prompts, function(answers) {
+                        ully.listUrlsOnSelectedCollection(userid, function(urllist) {
                             var prompts = [{
                                 type: "list",
                                 message: "Choose a url",
@@ -563,9 +644,14 @@ if (logged) {
                                 message: 'Are you sure you want to delete this collection?'
                             }];
                             //Ask
-                            ully.prompt(prompts, function (urlanswers) {
+                            ully.prompt(prompts, function(urlanswers) {
                                 if (urlanswers.delete) {
-                                    ully.moderationDeleteUrl(userid, answers.collection, urlanswers.url);
+                                    ully.moderationDeleteUrl(userid, answers.collection, urlanswers.url, function(err, data) {
+                                        if (err) {
+                                            return response(err, data);
+                                        }
+                                        return response(null, data);
+                                    });
                                 }
                             });
                         });
@@ -580,19 +666,25 @@ if (logged) {
     program
         .command('collections')
         .description('Show your collections'.white)
-        .action(function () {
+        .action(function() {
             if (program.username) {
-                if (program.json) {
-                    ully.collectionsByUsername(program.username, true);
-                } else {
-                    ully.collectionsByUsername(program.username);
-                }
+                ully.collectionsByUsername(program.username, function(err, data) {
+                    if (err) {
+                        return response(err, data, program.json);
+                    }
+                    return response(null, data, program.json);
+                });
             } else {
-                if (program.json) {
-                    ully.collections(true);
-                } else {
-                    ully.collections();
-                }
+                ully.collections(function(err, data) {
+                    if (err) {
+                        return response(err, data, program.json);
+                    }
+                    if (data.length < 1) {
+                        console.log('  You don\'t have collections. \n  Create your first collection.\n'.bold + '\n  $ ully collections:new'.bold.white);
+                        process.exit();
+                    }
+                    return response(null, data, program.json);
+                });
             }
         });
 
@@ -603,7 +695,7 @@ if (logged) {
     program
         .command('collections:new')
         .description('Create a new collection'.white)
-        .action(function () {
+        .action(function() {
             var prompts = [{
                 type: 'input',
                 name: 'name',
@@ -619,8 +711,13 @@ if (logged) {
                 default: true
             }];
             //Ask
-            ully.prompt(prompts, function (answers) {
-                ully.createCollections(answers.name, answers.slug, answers.public);
+            ully.prompt(prompts, function(answers) {
+                ully.createCollections(answers.name, answers.slug, answers.public, function(err, data) {
+                    if (err) {
+                        return response(err, data);
+                    }
+                    return response(null, data);
+                });
             });
         });
 
@@ -631,10 +728,10 @@ if (logged) {
     program
         .command('collections:update')
         .description('Update a specific collection'.white)
-        .action(function () {
-            ully.listCollections(function (list) {
+        .action(function() {
+            ully.listCollections(function(list) {
                 if (list.length < 1) {
-                    console.log(' You don\'t have collections. \n Create your first collection.\n' + '\n $ ully collections:new'.bold.white);
+                    console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
                     process.exit();
                 }
                 var prompts = [{
@@ -644,15 +741,15 @@ if (logged) {
                     choices: list
                 }];
                 //Ask
-                ully.prompt(prompts, function (collectionAnswers) {
+                ully.prompt(prompts, function(collectionAnswers) {
                     var prompts = [{
                         type: 'input',
                         name: 'name',
-                        message: 'Enter a name'
+                        message: 'Enter a new name, Leave blank for no change'
                     }, {
                         type: 'input',
                         name: 'slug',
-                        message: 'Enter a slug'
+                        message: 'Enter a new slug, Leave blank for no change'
                     }, {
                         type: "confirm",
                         message: "This is a public collection?",
@@ -660,8 +757,13 @@ if (logged) {
                         default: true
                     }];
                     //Ask
-                    ully.prompt(prompts, function (answers) {
-                        ully.updateCollections(collectionAnswers.collection, answers.name, answers.slug, answers.public);
+                    ully.prompt(prompts, function(answers) {
+                        ully.updateCollections(collectionAnswers.collection, answers.name, answers.slug, answers.public, function(err, data) {
+                            if (err) {
+                                return response(err, data);
+                            }
+                            return response(null, data);
+                        });
                     });
                 });
             });
@@ -674,10 +776,10 @@ if (logged) {
     program
         .command('collections:delete')
         .description('Delete a specific collection'.white)
-        .action(function () {
-            ully.listCollections(function (list) {
+        .action(function() {
+            ully.listCollections(function(list) {
                 if (list.length < 1) {
-                    console.log(' You don\'t have collections. \n Create your first collection.\n' + '\n $ ully collections:new'.bold.white);
+                    console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
                     process.exit();
                 }
                 var prompts = [{
@@ -695,10 +797,15 @@ if (logged) {
                     message: 'Do you confirm the collection deletion?'
                 }];
                 //Ask
-                ully.prompt(prompts, function (answers) {
+                ully.prompt(prompts, function(answers) {
                     if (answers.delete) {
                         if (answers.delete2) {
-                            ully.deleteCollections(answers.collection);
+                            ully.deleteCollections(answers.collection, function(err, data) {
+                                if (err) {
+                                    return response(err, data);
+                                }
+                                return response(null, data);
+                            });
                         }
                     }
                 });
@@ -713,10 +820,10 @@ if (logged) {
     program
         .command('collections:newurl')
         .description('Create a new url in selected collection'.white)
-        .action(function () {
-            ully.listCollections(function (list) {
+        .action(function() {
+            ully.listCollections(function(list) {
                 if (list.length < 1) {
-                    console.log(' You don\'t have collections. \n Create your first collection.\n' + '\n $ ully collections:new'.bold.white);
+                    console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
                     process.exit();
                 }
                 var prompts = [{
@@ -726,7 +833,7 @@ if (logged) {
                     choices: list
                 }];
                 //Ask
-                ully.prompt(prompts, function (collectionAnswers) {
+                ully.prompt(prompts, function(collectionAnswers) {
                     var prompts = [{
                         type: 'input',
                         name: 'title',
@@ -741,8 +848,13 @@ if (logged) {
                         message: 'Enter a description'
                     }];
                     //Ask
-                    ully.prompt(prompts, function (answers) {
-                        ully.createUrls(collectionAnswers.collection, answers.title, answers.url, answers.description);
+                    ully.prompt(prompts, function(answers) {
+                        ully.createUrls(collectionAnswers.collection, answers.title, answers.url, answers.description, function(err, data) {
+                            if (err) {
+                                return response(err, data);
+                            }
+                            return response(null, data);
+                        });
                     });
                 });
             });
@@ -755,10 +867,10 @@ if (logged) {
     program
         .command('collections:updateurl')
         .description('Update a url in selected collection'.white)
-        .action(function () {
-            ully.listCollections(function (list) {
+        .action(function() {
+            ully.listCollections(function(list) {
                 if (list.length < 1) {
-                    console.log(' You don\'t have collections. \n Create your first collection.\n' + '\n $ ully collections:new'.bold.white);
+                    console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
                     process.exit();
                 }
                 var prompts = [{
@@ -768,8 +880,8 @@ if (logged) {
                     choices: list
                 }];
                 //Ask
-                ully.prompt(prompts, function (collectionAnswers) {
-                    ully.listUrls(collectionAnswers.collection, function (urlList) {
+                ully.prompt(prompts, function(collectionAnswers) {
+                    ully.listUrls(collectionAnswers.collection, function(urlList) {
                         if (urlList.length < 1) {
                             console.log(' You don\'t have urls. \n Create your first url.\n' + '\n $ ully collections:newurl'.bold.white);
                             process.exit();
@@ -782,19 +894,24 @@ if (logged) {
                         }, {
                             type: 'input',
                             name: 'title',
-                            message: 'Enter a title'
+                            message: 'Enter a new title, Leave blank for no change'
                         }, {
                             type: 'input',
                             name: 'url',
-                            message: 'Enter a url'
+                            message: 'Enter a new url, Leave blank for no change'
                         }, {
                             type: 'input',
                             name: 'description',
-                            message: 'Enter a description'
+                            message: 'Enter a new description, Leave blank for no change'
                         }];
                         //Ask
-                        ully.prompt(prompts, function (answers) {
-                            ully.updateUrls(collectionAnswers.collection, answers.urltoupdate, answers.title, answers.url, answers.description);
+                        ully.prompt(prompts, function(answers) {
+                            ully.updateUrls(collectionAnswers.collection, answers.urltoupdate, answers.title, answers.url, answers.description, function(err, data) {
+                                if (err) {
+                                    return response(err, data);
+                                }
+                                return response(null, data);
+                            });
                         });
                     });
                 });
@@ -808,10 +925,10 @@ if (logged) {
     program
         .command('collections:deleteurl')
         .description('Delete a url in selected collection'.white)
-        .action(function () {
-            ully.listCollections(function (list) {
+        .action(function() {
+            ully.listCollections(function(list) {
                 if (list.length < 1) {
-                    console.log(' You don\'t have collections. \n Create your first collection.\n' + '\n $ ully collections:new'.bold.white);
+                    console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
                     process.exit();
                 }
                 var prompts = [{
@@ -821,8 +938,8 @@ if (logged) {
                     choices: list
                 }];
                 //Ask
-                ully.prompt(prompts, function (collectionAnswers) {
-                    ully.listUrls(collectionAnswers.collection, function (urlList) {
+                ully.prompt(prompts, function(collectionAnswers) {
+                    ully.listUrls(collectionAnswers.collection, function(urlList) {
                         if (urlList.length < 1) {
                             console.log(' You don\'t have urls. \n Create your first url.\n' + '\n $ ully collections:newurl'.bold.white);
                             process.exit();
@@ -832,7 +949,7 @@ if (logged) {
                             message: "Choose a urls to delete",
                             name: "urlstodelete",
                             choices: urlList,
-                            validate: function (answer) {
+                            validate: function(answer) {
                                 if (answer.length < 1) {
                                     return "You must choose at least one topping.";
                                 }
@@ -848,10 +965,15 @@ if (logged) {
                             message: 'Do you confirm the url deletion?'
                         }];
                         //Ask
-                        ully.prompt(prompts, function (answers) {
+                        ully.prompt(prompts, function(answers) {
                             if (answers.delete) {
                                 if (answers.delete2) {
-                                    ully.deleteUrls(collectionAnswers.collection, answers.urlstodelete);
+                                    ully.deleteUrls(collectionAnswers.collection, answers.urlstodelete, function(err, data) {
+                                        if (err) {
+                                            return response(err, data);
+                                        }
+                                        return response(null, data);
+                                    });
                                 }
                             }
                         });
@@ -865,7 +987,7 @@ if (logged) {
  * Ully on help ption show examples
  */
 
-program.on('--help', function () {
+program.on('--help', function() {
     console.log('  Examples:');
     console.log('');
     console.log('    $ ully signup');
@@ -874,6 +996,22 @@ program.on('--help', function () {
     console.log('    $ ully logout');
     console.log('');
 });
+
+/*
+ * Ully Banner
+ */
+
+if (process.argv.length === 3 && process.argv[2] === "--help") {
+    banner();
+}
+
+if (process.argv.length === 4 && process.argv[3] !== "--json") {
+    banner();
+} else {
+    if (process.argv.length === 3 && process.argv[2] !== "--help") {
+        banner();
+    }
+}
 
 /*
  * Ully Process Parser
@@ -895,5 +1033,6 @@ if (notifier.update) {
 }
 
 if (process.argv.length == 2) {
+    banner();
     program.help();
 }
