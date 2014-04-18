@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.0</em>
+            <em>API Docs for: 0.3.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -132,7 +132,7 @@ var Ully = module.exports = function Ully(token) {
     //Access Token
     this.access_token = token;
     //apiUri
-    this.uri = &#x27;https://ully.in/api/&#x27;;
+    this.uri = process.env.ULLY_URI || &#x27;https://ully.in/api/&#x27;;
     var apiUri = this.uri + &#x27;:path&#x27;;
     //Get handler
     this.get = function(path, callback) {
@@ -222,7 +222,7 @@ Ully.prototype.signup = function signup(name, email, username, password, callbac
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -245,7 +245,7 @@ Ully.prototype.signup = function signup(name, email, username, password, callbac
  */
 
 Ully.prototype.login = function login(email, password, callback) {
-    this.post(&#x27;forgot/token&#x27;, {
+    this.post(&#x27;forgot/access_token&#x27;, {
         email: email,
         password: password
     }, function(err, res) {
@@ -254,8 +254,8 @@ Ully.prototype.login = function login(email, password, callback) {
                 return callback(err);
             }
             //Write config
-            if (res.body.token &amp;&amp; res.body.role) {
-                h.write(join(__dirname, &#x27;ullyConfig.json&#x27;), JSON.stringify(res.body, null, 4));
+            if (res.body.response.hasOwnProperty(&#x27;access_token&#x27;) &amp;&amp; res.body.response.hasOwnProperty(&#x27;permissions&#x27;)) {
+                h.write(join(__dirname, &#x27;ullyConfig.json&#x27;), JSON.stringify(res.body.response, null, 4));
                 return callback(null, {
                     message: &#x27;Logged successfully!&#x27;
                 });
@@ -293,7 +293,7 @@ Ully.prototype.forgot = function forgot(email, username, callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -319,7 +319,7 @@ Ully.prototype.stats = function stats(callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -346,7 +346,7 @@ Ully.prototype.statsByUsername = function statsByUsername(username, callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -372,7 +372,7 @@ Ully.prototype.status = function status(callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -399,7 +399,7 @@ Ully.prototype.me = function me(callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -436,7 +436,7 @@ Ully.prototype.updateMe = function updateMe(name, email, username, currentPasswo
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -466,7 +466,7 @@ Ully.prototype.deleteMe = function deleteMe(callback) {
                 h.remove(__dirname + &#x27;/ullyConfig.json&#x27;);
             }
             if (!err) {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -492,7 +492,7 @@ Ully.prototype.users = function users(callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -519,7 +519,7 @@ Ully.prototype.UsersByUsername = function UsersByUsername(username, callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -546,7 +546,7 @@ Ully.prototype.usersShow = function usersShow(userID, callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -585,7 +585,7 @@ Ully.prototype.createUsers = function createUsers(name, email, username, passwor
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -625,7 +625,7 @@ Ully.prototype.updateUsers = function updateUsers(userID, name, email, username,
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -652,7 +652,7 @@ Ully.prototype.deleteUsers = function deleteUsers(userID, callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -678,7 +678,7 @@ Ully.prototype.moderation = function moderation(callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -704,7 +704,7 @@ Ully.prototype.listCollectionsByUserId = function listCollectionsByUserId(userID
         }
         var list = [];
         //Start
-        _.each(res.body, function(val, key) {
+        _.each(res.body.response, function(val, key) {
             list.push({
                 name: val.name + &#x27; -&gt; &#x27; + val.slug,
                 value: val.slug
@@ -735,7 +735,7 @@ Ully.prototype.listUrlsOnSelectedCollection = function listUrlsOnSelectedCollect
         }
         var list = [];
         //Start
-        _.each(res.body, function(val, key) {
+        _.each(res.body.response, function(val, key) {
             _.each(val.urls, function(uval, ukey) {
                 list.push({
                     name: uval.url,
@@ -769,7 +769,7 @@ Ully.prototype.moderationShowCollectionByUser = function moderationShowCollectio
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -797,7 +797,7 @@ Ully.prototype.moderationDeleteCollection = function moderationDeleteCollection(
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -826,7 +826,7 @@ Ully.prototype.moderationDeleteUrl = function moderationDeleteUrl(userID, collec
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -852,7 +852,7 @@ Ully.prototype.collections = function collections(callback) {
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -880,7 +880,7 @@ Ully.prototype.collectionsByUsername = function collectionsByUsername(username, 
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -906,7 +906,7 @@ Ully.prototype.listCollections = function listCollections(callback) {
         }
         var list = [];
         //Start
-        _.each(res.body, function(val, key) {
+        _.each(res.body.response, function(val, key) {
             list.push({
                 name: val.name + &#x27; -&gt; &#x27; + val.slug,
                 value: val.slug
@@ -936,7 +936,7 @@ Ully.prototype.listUrls = function listUrls(collection, callback) {
             throw err;
         }
         var list = [];
-        var selectedCollection = _.where(res.body, {
+        var selectedCollection = _.where(res.body.response, {
             slug: collection
         });
         //Start
@@ -978,7 +978,7 @@ Ully.prototype.createCollections = function createCollections(name, slug, public
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -1012,7 +1012,7 @@ Ully.prototype.updateCollections = function updateCollections(collectionSlug, na
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -1039,7 +1039,7 @@ Ully.prototype.deleteCollections = function deleteCollections(collectionSlug, ca
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -1073,7 +1073,7 @@ Ully.prototype.createUrls = function createUrls(collectionSlug, url, title, desc
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -1108,7 +1108,7 @@ Ully.prototype.updateUrls = function updateUrls(collectionSlug, urlID, url, titl
             if (err) {
                 callback(err);
             } else {
-                callback(null, res.body);
+                callback(null, res.body.response);
             }
         }
     });
@@ -1145,7 +1145,7 @@ Ully.prototype.deleteUrls = function deleteUrls(collectionSlug, urlsID, callback
                 callback(err);
             } else {
                 callback(null, {
-                    message: &#x27;All selected urls are successfully deleted!&#x27;
+                    msg: &#x27;All selected urls are successfully deleted!&#x27;
                 });
             }
         }

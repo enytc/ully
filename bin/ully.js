@@ -4,7 +4,7 @@
  * ully
  * https://github.com/enytc/ully
  *
- * Copyright (c) 2014, Christopher EnyTC
+ * Copyright (c) 2014, EnyTC Corporation
  * Licensed under the BSD license.
  */
 
@@ -15,6 +15,7 @@
 var program = require('commander'),
     updateNotifier = require('update-notifier'),
     Insight = require('insight'),
+    _ = require('underscore'),
     pj = require('prettyjson').render,
     banner = require('../lib/banner.js'),
     Ully = require('..'),
@@ -78,16 +79,16 @@ program
 
 if (h.exists(configPath)) {
     var config = require(configPath);
-    ully = new Ully(config.token);
+    ully = new Ully(config.access_token);
     logged = true;
-    isAdmin = true ? config.role === 'admin' : false;
+    isAdmin = true ? _.contains(config.permissions, 'admin') : false;
 } else {
     ully = new Ully('');
     debug('  You are not logged in at the time. You may not use all the features of Ully if you do not login with your account.\n', 'error');
 }
 
 program
-    .option('--json', 'Show pure JSON output');
+    .option('-j, --json', 'Show pure JSON output');
 
 program
     .option('-u, --username <username>', 'A username of a specific user');
@@ -549,30 +550,11 @@ if (logged) {
             .command('mod:info <userid>')
             .description('Show info of a specific collection'.white)
             .action(function(userid) {
-                ully.listCollectionsByUserId(userid, function(list) {
-                    if (list.length < 1) {
-                        console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
-                        process.exit();
+                ully.moderationShowCollectionByUser(userid, function(err, data) {
+                    if (err) {
+                        return response(err, data, program.json);
                     }
-                    if (list.length < 1) {
-                        console.log(' You don\'t have collections. \n Create your first collection.\n'.bold + '\n $ ully collections:new'.bold.white);
-                        process.exit();
-                    }
-                    var prompts = [{
-                        type: "list",
-                        message: "Choose a collection",
-                        name: "collection",
-                        choices: list
-                    }];
-                    //Ask
-                    ully.prompt(prompts, function(answers) {
-                        ully.moderationShowCollectionByUser(userid, answers.collection, function(err, data) {
-                            if (err) {
-                                return response(err, data);
-                            }
-                            return response(null, data);
-                        });
-                    });
+                    return response(null, data, program.json);
                 });
             });
 
@@ -849,7 +831,7 @@ if (logged) {
                     }];
                     //Ask
                     ully.prompt(prompts, function(answers) {
-                        ully.createUrls(collectionAnswers.collection, answers.title, answers.url, answers.description, function(err, data) {
+                        ully.createUrls(collectionAnswers.collection, answers.url, answers.title, answers.description, function(err, data) {
                             if (err) {
                                 return response(err, data);
                             }
@@ -906,7 +888,7 @@ if (logged) {
                         }];
                         //Ask
                         ully.prompt(prompts, function(answers) {
-                            ully.updateUrls(collectionAnswers.collection, answers.urltoupdate, answers.title, answers.url, answers.description, function(err, data) {
+                            ully.updateUrls(collectionAnswers.collection, answers.urltoupdate, answers.url, answers.title, answers.description, function(err, data) {
                                 if (err) {
                                     return response(err, data);
                                 }

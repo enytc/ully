@@ -2,7 +2,7 @@
     "project": {
         "name": "Ully API",
         "description": "Ully API: Manage your favorite links easily and quickly",
-        "version": "0.3.0",
+        "version": "0.3.1",
         "url": "https://github.com/enytc/ully"
     },
     "files": {
