@@ -15,9 +15,9 @@
 var program = require('commander'),
     updateNotifier = require('update-notifier'),
     Insight = require('insight'),
-    _ = require('underscore'),
     pj = require('prettyjson').render,
     banner = require('../lib/banner.js'),
+    open = require('open'),
     Ully = require('..'),
     ully,
     logged = false,
@@ -81,7 +81,7 @@ if (h.exists(configPath)) {
     var config = require(configPath);
     ully = new Ully(config.access_token);
     logged = true;
-    isAdmin = true ? _.contains(config.permissions, 'admin') : false;
+    isAdmin = true ? config.role === 'admin' : false;
 } else {
     ully = new Ully('');
     debug('  You are not logged in at the time. You may not use all the features of Ully if you do not login with your account.\n', 'error');
@@ -101,32 +101,8 @@ program
     .command('signup')
     .description('Create your Ully account'.white)
     .action(function() {
-        var prompts = [{
-            type: 'input',
-            name: 'name',
-            message: 'What\'s your name?'
-        }, {
-            type: 'input',
-            name: 'email',
-            message: 'What\'s your email?'
-        }, {
-            type: 'input',
-            name: 'username',
-            message: 'Choose a username'
-        }, {
-            type: 'password',
-            name: 'password',
-            message: 'Enter your password'
-        }];
-        //Ask
-        ully.prompt(prompts, function(answers) {
-            ully.signup(answers.name, answers.email, answers.username, answers.password, function(err, data) {
-                if (err) {
-                    return response(err, data);
-                }
-                return response(null, data);
-            });
-        });
+        debug(' Opening Signup page...', 'success');
+        open('https://ully.in/signup');
     });
 
 /*
@@ -165,24 +141,8 @@ program
     .command('forgot')
     .description('Reset your password'.white)
     .action(function() {
-        var prompts = [{
-            type: 'input',
-            name: 'email',
-            message: 'Enter your email'
-        }, {
-            type: 'input',
-            name: 'username',
-            message: 'Enter your username'
-        }];
-        //Ask
-        ully.prompt(prompts, function(answers) {
-            ully.forgot(answers.email, answers.username, function(err, data) {
-                if (err) {
-                    return response(err, data);
-                }
-                return response(null, data);
-            });
-        });
+        debug(' Opening Forgot page...', 'success');
+        open('https://ully.in/forgot');
     });
 
 /*

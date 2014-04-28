@@ -18,47 +18,6 @@ var api = new Ully('access_token');
 
 ## Documentation
 
-#### .signup(name, email, username, password, callback)
-
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `myname`
-
-
-**Parameter**: `email`
-**Type**: `String`
-**Example**: `example@example.com`
-
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
-
-
-**Parameter**: `password`
-**Type**: `String`
-**Example**: `123456test`
-
-
-**Parameter**: `callback`
-**Type**: `Function`
-**Example**: 
-```javascript
-function(err, data) {
-    
-}
-```
-
-The `signup` method is responsible for create accounts
-
-How to use this method
-
-```javascript
-api.signup('myname', 'email', 'myusername', '123456test', function(err, data) {
-    console.log(data);
-});
-```
-
 #### .login(email, password, callback)
 
 **Parameter**: `email`
@@ -86,58 +45,6 @@ How to use this method
 
 ```javascript
 api.login('email', '123456test', function(err, data) {
-    console.log(data);
-});
-```
-
-#### .forgot(email, username, callback)
-
-**Parameter**: `email`
-**Type**: `String`
-**Example**: `example@example.com`
-
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
-
-
-**Parameter**: `callback`
-**Type**: `Function`
-**Example**: 
-```javascript
-function(err, data) {
-    
-}
-```
-
-The `forgot` method is responsible for reset passwords
-
-How to use this method
-
-```javascript
-api.forgot('example@example.com', 'myusername', function(err, data) {
-    console.log(data);
-});
-```
-
-#### .stats(callback)
-
-**Parameter**: `callback`
-**Type**: `Function`
-**Example**: 
-```javascript
-function(err, data) {
-    
-}
-```
-
-The `stats` method is responsible for showing statistics of Ully
-
-How to use this method
-
-```javascript
-api.stats(function(err, data) {
     console.log(data);
 });
 ```

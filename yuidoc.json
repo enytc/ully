@@ -1,7 +1,7 @@
 {
     "name": "Ully API",
     "description": "Ully API: Manage your favorite links easily and quickly",
-    "version": "0.3.1",
+    "version": "0.4.0",
     "url": "https://github.com/enytc/ully",
     "options": {
         "outdir": "./docs",

@@ -2,7 +2,7 @@
     "project": {
         "name": "Ully API",
         "description": "Ully API: Manage your favorite links easily and quickly",
-        "version": "0.3.1",
+        "version": "0.4.0",
         "url": "https://github.com/enytc/ully"
     },
     "files": {
@@ -251,46 +251,6 @@
         {
             "file": "lib/ully.js",
             "line": 106,
-            "description": "Method responsible for create accounts",
-            "example": [
-                "\n\n    api.signup('name', 'email', 'username', 'password', function(err, data) {\n         console.log(data);\n    });"
-            ],
-            "itemtype": "method",
-            "name": "signup",
-            "access": "public",
-            "tagname": "",
-            "params": [
-                {
-                    "name": "name",
-                    "description": "Name",
-                    "type": "String"
-                },
-                {
-                    "name": "email",
-                    "description": "Email",
-                    "type": "String"
-                },
-                {
-                    "name": "username",
-                    "description": "Username",
-                    "type": "String"
-                },
-                {
-                    "name": "password",
-                    "description": "Password",
-                    "type": "String"
-                },
-                {
-                    "name": "callback",
-                    "description": "A callback with api response",
-                    "type": "Function"
-                }
-            ],
-            "class": "Ully"
-        },
-        {
-            "file": "lib/ully.js",
-            "line": 141,
             "description": "Method responsible for login in accounts",
             "example": [
                 "\n\n    api.login('email', 'username', 'password', function(err, data) {\n         console.log(data);\n    });"
@@ -320,37 +280,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 181,
-            "description": "Method responsible for reset passwords",
-            "example": [
-                "\n\n    api.forgot('email', 'username', function(err, data) {\n         console.log(data);\n    });"
-            ],
-            "itemtype": "method",
-            "name": "forgot",
-            "access": "public",
-            "tagname": "",
-            "params": [
-                {
-                    "name": "email",
-                    "description": "Email",
-                    "type": "String"
-                },
-                {
-                    "name": "username",
-                    "description": "Username",
-                    "type": "String"
-                },
-                {
-                    "name": "callback",
-                    "description": "A callback with api response",
-                    "type": "Function"
-                }
-            ],
-            "class": "Ully"
-        },
-        {
-            "file": "lib/ully.js",
-            "line": 212,
+            "line": 146,
             "description": "Method responsible for showing stats of Ully",
             "example": [
                 "\n\n    api.stats(function(err, data) {\n         console.log(data);\n    });"
@@ -370,7 +300,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 238,
+            "line": 172,
             "description": "Method responsible for showing stats of a specific user",
             "example": [
                 "\n\n    api.statsByUsername('myusername', function(err, data) {\n         console.log(data);\n    });"
@@ -395,7 +325,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 265,
+            "line": 199,
             "description": "Method responsible for showing the status of api",
             "example": [
                 "\n\n    api.status(function(err, data) {\n         console.log(data);\n    });"
@@ -415,7 +345,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 292,
+            "line": 226,
             "description": "Method responsible for showing profile info",
             "example": [
                 "\n\n    api.me(function(err, data) {\n         console.log(data);\n    });"
@@ -435,7 +365,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 318,
+            "line": 252,
             "description": "Method responsible for update profile info",
             "example": [
                 "\n\n    api.updateMe('name', email', 'username', 'currentPassword', 'password', function(err, data) {\n         console.log(data);\n    });"
@@ -480,7 +410,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 355,
+            "line": 289,
             "description": "Method responsible for delete profile info",
             "example": [
                 "\n\n    api.deleteMe(function(err, data) {\n         console.log(data);\n    });"
@@ -500,7 +430,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 385,
+            "line": 319,
             "description": "Method responsible for list all users",
             "example": [
                 "\n\n    api.users(function(err, data) {\n         console.log(data);\n    });"
@@ -520,7 +450,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 411,
+            "line": 345,
             "description": "Method responsible for showing info of a specific user by username",
             "example": [
                 "\n\n    api.UsersByUsername('myusername', function(err, data) {\n         console.log(data);\n    });"
@@ -545,7 +475,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 438,
+            "line": 372,
             "description": "Method responsible for showing info of a specific user",
             "example": [
                 "\n\n    api.usersShow('userID', function(err, data) {\n         console.log(data);\n    });"
@@ -570,7 +500,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 465,
+            "line": 399,
             "description": "Method responsible for create a new user",
             "example": [
                 "\n\n    api.createUsers('name', email', 'username', 'password', 'role', 'status', function(err, data) {\n         console.log(data);\n    });"
@@ -620,7 +550,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 504,
+            "line": 438,
             "description": "Method responsible for update a specific user info",
             "example": [
                 "\n\n    api.updateUsers('userID', 'name', email', 'username', 'password', 'role', 'status', function(err, data) {\n         console.log(data);\n    });"
@@ -675,7 +605,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 544,
+            "line": 478,
             "description": "Method responsible for remove a specific user info",
             "example": [
                 "\n\n    api.deleteUsers('userID', function(err, data) {\n         console.log(data);\n    });"
@@ -700,7 +630,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 571,
+            "line": 505,
             "description": "Method responsible for list all collections",
             "example": [
                 "\n\n    api.moderation(function(err, data) {\n         console.log(data);\n    });"
@@ -720,7 +650,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 597,
+            "line": 531,
             "description": "Method responsible for generate a dinamic list of collections",
             "example": [
                 "\n\n    api.listCollectionsByUserId();"
@@ -745,7 +675,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 628,
+            "line": 562,
             "description": "Method responsible for generate a dinamic list of urls in selected collection",
             "example": [
                 "\n\n    api.listUrlsOnSelectedCollection();"
@@ -770,7 +700,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 661,
+            "line": 595,
             "description": "Method responsible for list all collections by userID",
             "example": [
                 "\n\n    api.moderationShowCollectionByUser('userID', function(err, data) {\n         console.log(data);\n    });"
@@ -795,7 +725,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 688,
+            "line": 622,
             "description": "Method responsible for delete a specific collection",
             "example": [
                 "\n\n    api.moderationDeleteCollection('userID', 'collection', function(err, data) {\n         console.log(data);\n    });"
@@ -825,7 +755,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 716,
+            "line": 650,
             "description": "Method responsible for delete a specific url in selected collection",
             "example": [
                 "\n\n    api.moderationDeleteUrl('userID', 'collection', 'urlID', function(err, data) {\n         console.log(data);\n    });"
@@ -860,7 +790,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 745,
+            "line": 679,
             "description": "Method responsible for list all collections",
             "example": [
                 "\n\n    api.collections(function(err, data) {\n         console.log(data);\n    });"
@@ -880,7 +810,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 772,
+            "line": 706,
             "description": "Method responsible for list all collections of a specific user",
             "example": [
                 "\n\n    api.collectionsByUsername('myusername', function(err, data) {\n         console.log(data);\n    });"
@@ -905,7 +835,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 800,
+            "line": 734,
             "description": "Method responsible for generate a dinamic list of collections",
             "example": [
                 "\n\n    api.listCollections();"
@@ -925,7 +855,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 830,
+            "line": 764,
             "description": "Method responsible for generate a dinamic list of urls",
             "example": [
                 "\n\n    api.listUrls();"
@@ -950,7 +880,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 864,
+            "line": 798,
             "description": "Method responsible for create a new collection",
             "example": [
                 "\n\n    api.createCollections('name', 'slug', 'public', function(err, data) {\n         console.log(data);\n    });"
@@ -985,7 +915,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 897,
+            "line": 831,
             "description": "Method responsible for update a specific collection",
             "example": [
                 "\n\n    api.updateCollections('collectionSlug', 'name', 'slug', 'public', function(err, data) {\n         console.log(data);\n    });"
@@ -1025,13 +955,13 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 931,
+            "line": 865,
             "description": "Method responsible for delete a specific collection",
             "example": [
                 "\n\n    api.deleteCollections('collectionSlug', function(err, data) {\n         console.log(data);\n    });"
             ],
             "itemtype": "method",
-            "name": "updateCollections",
+            "name": "deleteCollections",
             "access": "public",
             "tagname": "",
             "params": [
@@ -1050,7 +980,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 958,
+            "line": 892,
             "description": "Method responsible for create a new url",
             "example": [
                 "\n\n    api.createUrls('collectionSlug', 'url', 'title', 'description', function(err, data) {\n         console.log(data);\n    });"
@@ -1090,7 +1020,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 992,
+            "line": 926,
             "description": "Method responsible for update a specific url",
             "example": [
                 "\n\n    api.updateUrls('collectionSlug', 'title', 'url', 'description', function(err, data) {\n         console.log(data);\n    });"
@@ -1135,7 +1065,7 @@
         },
         {
             "file": "lib/ully.js",
-            "line": 1027,
+            "line": 961,
             "description": "Method responsible for delete a specific url",
             "example": [
                 "\n\n    api.deleteUrls('collectionSlug', urlsID, function(err, data) {\n         console.log(data);\n    });"

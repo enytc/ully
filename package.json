@@ -1,51 +1,66 @@
 {
-    "name": "ully",
-    "description": "Manage your favorite links easily and quickly",
-    "version": "0.3.1",
-    "homepage": "https://github.com/enytc/ully",
-    "author": {
-        "name": "Christopher EnyTC",
-        "email": "chrisenytc@gmail.com"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/enytc/ully.git"
-    },
-    "bugs": {
-        "url": "https://github.com/enytc/ully/issues"
-    },
-    "licenses": [{
-        "type": "BSD",
-        "url": "https://github.com/enytc/ully/blob/master/LICENSE"
-    }],
-    "main": "lib/ully",
-    "bin": {
-        "ully": "bin/ully.js"
-    },
-    "engines": {
-        "node": ">= 0.10.26"
-    },
-    "scripts": {
-        "test": "gulp test"
-    },
-    "dependencies": {
-        "commander": "~2.1.0",
-        "inquirer": "~0.4.1",
-        "superagent": "~0.16.0",
-        "async": "~0.2.10",
-        "colors": "~0.6.2",
-        "prettyjson": "~0.11.1",
-        "underscore": "~1.5.2",
-        "update-notifier": "~0.1.7",
-        "insight": "~0.3.1"
-    },
-    "devDependencies": {
-        "mocha": "~1.10.0",
-        "chai": "~1.8.0",
-        "gulp": "~3.5.0",
-        "gulp-jshint": "~1.3.4",
-        "gulp-mocha": "~0.4.1",
-        "jshint-stylish": "~0.1.5"
-    },
-    "keywords": ["ully", "bookmark", "manager", "favorites", "links", "link", "urls", "url", "easy", "api", "cli"]
+  "name": "ully",
+  "description": "Manage your favorite links easily and quickly",
+  "version": "0.4.0",
+  "homepage": "https://github.com/enytc/ully",
+  "author": {
+    "name": "Christopher EnyTC",
+    "email": "chrisenytc@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/enytc/ully.git"
+  },
+  "bugs": {
+    "url": "https://github.com/enytc/ully/issues"
+  },
+  "licenses": [
+    {
+      "type": "BSD",
+      "url": "https://github.com/enytc/ully/blob/master/LICENSE"
+    }
+  ],
+  "main": "lib/ully",
+  "bin": {
+    "ully": "bin/ully.js"
+  },
+  "engines": {
+    "node": ">= 0.10.26"
+  },
+  "scripts": {
+    "test": "gulp test"
+  },
+  "dependencies": {
+    "commander": "~2.1.0",
+    "inquirer": "~0.4.1",
+    "superagent": "~0.16.0",
+    "async": "~0.2.10",
+    "colors": "~0.6.2",
+    "prettyjson": "~0.11.1",
+    "underscore": "~1.5.2",
+    "update-notifier": "~0.1.7",
+    "insight": "~0.3.1",
+    "open": "0.0.5"
+  },
+  "devDependencies": {
+    "mocha": "~1.10.0",
+    "chai": "~1.8.0",
+    "gulp": "~3.5.0",
+    "gulp-jshint": "~1.3.4",
+    "gulp-mocha": "~0.4.1",
+    "jshint-stylish": "~0.1.5"
+  },
+  "keywords": [
+    "ully",
+    "bookmark",
+    "manager",
+    "favorites",
+    "links",
+    "link",
+    "urls",
+    "url",
+    "easy",
+    "api",
+    "cli"
+  ]
 }
