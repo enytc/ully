@@ -97,7 +97,7 @@ project:
    # Navigate to the newly cloned directory
    cd ully
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/enytc/ully
+   git remote add upstream https://github.com/ullyin/ully
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:

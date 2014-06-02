@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.4.0</em>
+            <em>API Docs for: 0.5.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -92,7 +92,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/lib_ully.js.html#l27"><code>lib&#x2F;ully.js:27</code></a>
+            Defined in: <a href="../files/lib_ully.js.html#l26"><code>lib&#x2F;ully.js:26</code></a>
         </div>
     
 
@@ -119,7 +119,7 @@
             
                 <li class="arg">
                     
-                        <code>access_token</code>
+                        <code>AccessToken</code>
                     
                 </li>
             
@@ -152,7 +152,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l27"><code>lib&#x2F;ully.js:27</code></a>
+        <a href="../files/lib_ully.js.html#l26"><code>lib&#x2F;ully.js:26</code></a>
         
         </p>
 
@@ -174,7 +174,7 @@
             
                 <li class="param">
                     
-                        <code class="param-name">access_token</code>
+                        <code class="param-name">AccessToken</code>
                         <span class="type">String</span>
                     
 
@@ -199,7 +199,7 @@
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>var api = new Ully(&#39;access_token&#39;);</code></pre>
+                <pre class="code prettyprint"><code>var api = new Ully(&#39;AccessToken&#39;);</code></pre>
 
             </div>
         </div>
@@ -232,6 +232,13 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method public">
+                                <a href="#method_account">account</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
                                 <a href="#method_collections">collections</a>
 
                                 
@@ -260,21 +267,7 @@
                             </li>
                         
                             <li class="index-item method public">
-                                <a href="#method_createUsers">createUsers</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
                                 <a href="#method_deleteCollections">deleteCollections</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_deleteMe">deleteMe</a>
 
                                 
                                 
@@ -288,21 +281,7 @@
                             </li>
                         
                             <li class="index-item method public">
-                                <a href="#method_deleteUsers">deleteUsers</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
                                 <a href="#method_listCollections">listCollections</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_listCollectionsByUserId">listCollectionsByUserId</a>
 
                                 
                                 
@@ -316,49 +295,7 @@
                             </li>
                         
                             <li class="index-item method public">
-                                <a href="#method_listUrlsOnSelectedCollection">listUrlsOnSelectedCollection</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
                                 <a href="#method_login">login</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_me">me</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_moderation">moderation</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_moderationDeleteCollection">moderationDeleteCollection</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_moderationDeleteUrl">moderationDeleteUrl</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_moderationShowCollectionByUser">moderationShowCollectionByUser</a>
 
                                 
                                 
@@ -393,6 +330,13 @@
                             </li>
                         
                             <li class="index-item method public">
+                                <a href="#method_updateAccount">updateAccount</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
                                 <a href="#method_updateCollections">updateCollections</a>
 
                                 
@@ -400,42 +344,7 @@
                             </li>
                         
                             <li class="index-item method public">
-                                <a href="#method_updateMe">updateMe</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
                                 <a href="#method_updateUrls">updateUrls</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_updateUsers">updateUsers</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_users">users</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_UsersByUsername">UsersByUsername</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method public">
-                                <a href="#method_usersShow">usersShow</a>
 
                                 
                                 
@@ -455,6 +364,108 @@
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_account" class="method item public">
+    <h3 class="name"><code>account</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>callback</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_ully.js.html#l215"><code>lib&#x2F;ully.js:215</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method responsible for showing profile info</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">callback</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>A callback with api response</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>api.account(function(err, data) {
+     console.log(data);
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
 
                 
                     <div id="method_collections" class="method item public">
@@ -501,7 +512,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l679"><code>lib&#x2F;ully.js:679</code></a>
+        <a href="../files/lib_ully.js.html#l278"><code>lib&#x2F;ully.js:278</code></a>
         
         </p>
 
@@ -609,7 +620,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l706"><code>lib&#x2F;ully.js:706</code></a>
+        <a href="../files/lib_ully.js.html#l305"><code>lib&#x2F;ully.js:305</code></a>
         
         </p>
 
@@ -745,7 +756,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l798"><code>lib&#x2F;ully.js:798</code></a>
+        <a href="../files/lib_ully.js.html#l396"><code>lib&#x2F;ully.js:396</code></a>
         
         </p>
 
@@ -919,7 +930,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l892"><code>lib&#x2F;ully.js:892</code></a>
+        <a href="../files/lib_ully.js.html#l490"><code>lib&#x2F;ully.js:490</code></a>
         
         </p>
 
@@ -1041,240 +1052,6 @@
 </div>
 
                 
-                    <div id="method_createUsers" class="method item public">
-    <h3 class="name"><code>createUsers</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>email</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>username</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>password</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>role</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>status</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l399"><code>lib&#x2F;ully.js:399</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for create a new user</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">name</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Name</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">email</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Email</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">username</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Username</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">password</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Password</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">role</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User role</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">status</code>
-                        <span class="type">Boolean</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User status</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.createUsers(&#39;name&#39;, email&#39;, &#39;username&#39;, &#39;password&#39;, &#39;role&#39;, &#39;status&#39;, function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
                     <div id="method_deleteCollections" class="method item public">
     <h3 class="name"><code>deleteCollections</code></h3>
 
@@ -1325,7 +1102,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l865"><code>lib&#x2F;ully.js:865</code></a>
+        <a href="../files/lib_ully.js.html#l463"><code>lib&#x2F;ully.js:463</code></a>
         
         </p>
 
@@ -1399,108 +1176,6 @@
 </div>
 
                 
-                    <div id="method_deleteMe" class="method item public">
-    <h3 class="name"><code>deleteMe</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l289"><code>lib&#x2F;ully.js:289</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for delete profile info</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.deleteMe(function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
                     <div id="method_deleteUrls" class="method item public">
     <h3 class="name"><code>deleteUrls</code></h3>
 
@@ -1557,7 +1232,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l961"><code>lib&#x2F;ully.js:961</code></a>
+        <a href="../files/lib_ully.js.html#l559"><code>lib&#x2F;ully.js:559</code></a>
         
         </p>
 
@@ -1647,130 +1322,6 @@
 </div>
 
                 
-                    <div id="method_deleteUsers" class="method item public">
-    <h3 class="name"><code>deleteUsers</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>userID</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l478"><code>lib&#x2F;ully.js:478</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for remove a specific user info</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">userID</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.deleteUsers(&#39;userID&#39;, function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
                     <div id="method_listCollections" class="method item public">
     <h3 class="name"><code>listCollections</code></h3>
 
@@ -1815,7 +1366,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l734"><code>lib&#x2F;ully.js:734</code></a>
+        <a href="../files/lib_ully.js.html#l332"><code>lib&#x2F;ully.js:332</code></a>
         
         </p>
 
@@ -1864,128 +1415,6 @@
 
             <div class="example-content">
                 <pre class="code prettyprint"><code>api.listCollections();</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_listCollectionsByUserId" class="method item public">
-    <h3 class="name"><code>listCollectionsByUserId</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>userID</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l531"><code>lib&#x2F;ully.js:531</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for generate a dinamic list of collections</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">userID</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.listCollectionsByUserId();</code></pre>
 
             </div>
         </div>
@@ -2043,7 +1472,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l764"><code>lib&#x2F;ully.js:764</code></a>
+        <a href="../files/lib_ully.js.html#l362"><code>lib&#x2F;ully.js:362</code></a>
         
         </p>
 
@@ -2115,128 +1544,6 @@
 </div>
 
                 
-                    <div id="method_listUrlsOnSelectedCollection" class="method item public">
-    <h3 class="name"><code>listUrlsOnSelectedCollection</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>userID</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l562"><code>lib&#x2F;ully.js:562</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for generate a dinamic list of urls in selected collection</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">userID</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.listUrlsOnSelectedCollection();</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
                     <div id="method_login" class="method item public">
     <h3 class="name"><code>login</code></h3>
 
@@ -2246,13 +1553,7 @@
             
                 <li class="arg">
                     
-                        <code>email</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>password</code>
+                        <code>AccessToken</code>
                     
                 </li>
             
@@ -2316,30 +1617,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">email</code>
+                        <code class="param-name">AccessToken</code>
                         <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>Email</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">password</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Password</p>
+                        <p>A Access Token</p>
 
                     </div>
 
@@ -2373,649 +1658,7 @@
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>api.login(&#39;email&#39;, &#39;username&#39;, &#39;password&#39;, function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_me" class="method item public">
-    <h3 class="name"><code>me</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l226"><code>lib&#x2F;ully.js:226</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for showing profile info</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.me(function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_moderation" class="method item public">
-    <h3 class="name"><code>moderation</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l505"><code>lib&#x2F;ully.js:505</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for list all collections</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.moderation(function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_moderationDeleteCollection" class="method item public">
-    <h3 class="name"><code>moderationDeleteCollection</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>userID</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>collection</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l622"><code>lib&#x2F;ully.js:622</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for delete a specific collection</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">userID</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">collection</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Collection ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.moderationDeleteCollection(&#39;userID&#39;, &#39;collection&#39;, function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_moderationDeleteUrl" class="method item public">
-    <h3 class="name"><code>moderationDeleteUrl</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>userID</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>collection</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>urlID</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l650"><code>lib&#x2F;ully.js:650</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for delete a specific url in selected collection</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">userID</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">collection</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Collection ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">urlID</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Url ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.moderationDeleteUrl(&#39;userID&#39;, &#39;collection&#39;, &#39;urlID&#39;, function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_moderationShowCollectionByUser" class="method item public">
-    <h3 class="name"><code>moderationShowCollectionByUser</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>userID</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l595"><code>lib&#x2F;ully.js:595</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for list all collections by userID</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">userID</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.moderationShowCollectionByUser(&#39;userID&#39;, function(err, data) {
+                <pre class="code prettyprint"><code>api.login(&#39;accessToken&#39;, function(err, data) {
      console.log(data);
 });</code></pre>
 
@@ -3191,7 +1834,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l146"><code>lib&#x2F;ully.js:146</code></a>
+        <a href="../files/lib_ully.js.html#l135"><code>lib&#x2F;ully.js:135</code></a>
         
         </p>
 
@@ -3299,7 +1942,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l172"><code>lib&#x2F;ully.js:172</code></a>
+        <a href="../files/lib_ully.js.html#l161"><code>lib&#x2F;ully.js:161</code></a>
         
         </p>
 
@@ -3417,7 +2060,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l199"><code>lib&#x2F;ully.js:199</code></a>
+        <a href="../files/lib_ully.js.html#l188"><code>lib&#x2F;ully.js:188</code></a>
         
         </p>
 
@@ -3475,198 +2118,8 @@
 </div>
 
                 
-                    <div id="method_updateCollections" class="method item public">
-    <h3 class="name"><code>updateCollections</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>collectionSlug</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>slug</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>publicCollection</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l831"><code>lib&#x2F;ully.js:831</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for update a specific collection</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">collectionSlug</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Slug</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">name</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Name</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">slug</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Slug</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">publicCollection</code>
-                        <span class="type">Boolean</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Public Collection</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.updateCollections(&#39;collectionSlug&#39;, &#39;name&#39;, &#39;slug&#39;, &#39;public&#39;, function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_updateMe" class="method item public">
-    <h3 class="name"><code>updateMe</code></h3>
+                    <div id="method_updateAccount" class="method item public">
+    <h3 class="name"><code>updateAccount</code></h3>
 
     
         <div class="args">
@@ -3739,7 +2192,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l252"><code>lib&#x2F;ully.js:252</code></a>
+        <a href="../files/lib_ully.js.html#l241"><code>lib&#x2F;ully.js:241</code></a>
         
         </p>
 
@@ -3867,7 +2320,197 @@
             <h4>Example:</h4>
 
             <div class="example-content">
-                <pre class="code prettyprint"><code>api.updateMe(&#39;name&#39;, email&#39;, &#39;username&#39;, &#39;currentPassword&#39;, &#39;password&#39;, function(err, data) {
+                <pre class="code prettyprint"><code>api.updateAccount(&#39;name&#39;, email&#39;, &#39;username&#39;, &#39;currentPassword&#39;, &#39;password&#39;, function(err, data) {
+     console.log(data);
+});</code></pre>
+
+            </div>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_updateCollections" class="method item public">
+    <h3 class="name"><code>updateCollections</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>collectionSlug</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>name</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>slug</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>publicCollection</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>callback</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/lib_ully.js.html#l429"><code>lib&#x2F;ully.js:429</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Method responsible for update a specific collection</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">collectionSlug</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Slug</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Name</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">slug</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Slug</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">publicCollection</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Public Collection</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">callback</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>A callback with api response</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <pre class="code prettyprint"><code>api.updateCollections(&#39;collectionSlug&#39;, &#39;name&#39;, &#39;slug&#39;, &#39;public&#39;, function(err, data) {
      console.log(data);
 });</code></pre>
 
@@ -3951,7 +2594,7 @@
             
         
         
-        <a href="../files/lib_ully.js.html#l926"><code>lib&#x2F;ully.js:926</code></a>
+        <a href="../files/lib_ully.js.html#l524"><code>lib&#x2F;ully.js:524</code></a>
         
         </p>
 
@@ -4080,612 +2723,6 @@
 
             <div class="example-content">
                 <pre class="code prettyprint"><code>api.updateUrls(&#39;collectionSlug&#39;, &#39;title&#39;, &#39;url&#39;, &#39;description&#39;, function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_updateUsers" class="method item public">
-    <h3 class="name"><code>updateUsers</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>userID</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>name</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>email</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>username</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>password</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>role</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>status</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l438"><code>lib&#x2F;ully.js:438</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for update a specific user info</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">userID</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">name</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Name</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">email</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Email</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">username</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Username</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">password</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Password</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">role</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User role</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">status</code>
-                        <span class="type">Boolean</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User status</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.updateUsers(&#39;userID&#39;, &#39;name&#39;, email&#39;, &#39;username&#39;, &#39;password&#39;, &#39;role&#39;, &#39;status&#39;, function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_users" class="method item public">
-    <h3 class="name"><code>users</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l319"><code>lib&#x2F;ully.js:319</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for list all users</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.users(function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_UsersByUsername" class="method item public">
-    <h3 class="name"><code>UsersByUsername</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>username</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l345"><code>lib&#x2F;ully.js:345</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for showing info of a specific user by username</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">username</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>Username</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.UsersByUsername(&#39;myusername&#39;, function(err, data) {
-     console.log(data);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_usersShow" class="method item public">
-    <h3 class="name"><code>usersShow</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>userID</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>callback</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag public">public</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/lib_ully.js.html#l372"><code>lib&#x2F;ully.js:372</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Method responsible for showing info of a specific user</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">userID</code>
-                        <span class="type">String</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>User ID</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">callback</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>A callback with api response</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>api.usersShow(&#39;userID&#39;, function(err, data) {
      console.log(data);
 });</code></pre>
 

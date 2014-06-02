@@ -1,8 +1,8 @@
 {
   "name": "ully",
   "description": "Manage your favorite links easily and quickly",
-  "version": "0.4.0",
-  "homepage": "https://github.com/enytc/ully",
+  "version": "0.5.0",
+  "homepage": "https://github.com/ullyin/ully",
   "author": {
     "name": "Christopher EnyTC",
     "email": "chrisenytc@gmail.com"
@@ -12,12 +12,12 @@
     "url": "git://github.com/enytc/ully.git"
   },
   "bugs": {
-    "url": "https://github.com/enytc/ully/issues"
+    "url": "https://github.com/ullyin/ully/issues"
   },
   "licenses": [
     {
       "type": "BSD",
-      "url": "https://github.com/enytc/ully/blob/master/LICENSE"
+      "url": "https://github.com/ullyin/ully/blob/master/LICENSE"
     }
   ],
   "main": "lib/ully",
@@ -60,6 +60,7 @@
     "urls",
     "url",
     "easy",
+    "sdk",
     "api",
     "cli"
   ]

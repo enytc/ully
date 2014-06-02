@@ -1,4 +1,4 @@
-# Ully [![Build Status](https://secure.travis-ci.org/enytc/ully.png?branch=master)](http://travis-ci.org/enytc/ully) [![NPM version](https://badge-me.herokuapp.com/api/npm/ully.png)](http://badges.enytc.com/for/npm/ully) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/enytc/ully/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+# Ully [![Build Status](https://secure.travis-ci.org/ullyin/ully.png?branch=master)](http://travis-ci.org/ullyin/ully) [![NPM version](https://badge-me.herokuapp.com/api/npm/ully.png)](http://badges.enytc.com/for/npm/ully)
 
 > Manage your favorite links easily and quickly
 
@@ -18,16 +18,11 @@ var api = new Ully('access_token');
 
 ## Documentation
 
-#### .login(email, password, callback)
+#### .login(accessToken, callback)
 
-**Parameter**: `email`
+**Parameter**: `accessToken`
 **Type**: `String`
-**Example**: `example@example.com`
-
-
-**Parameter**: `password`
-**Type**: `String`
-**Example**: `123456test`
+**Example**: `ully_access_token`
 
 
 **Parameter**: `callback`
@@ -44,7 +39,7 @@ The `login` method is responsible to login in accounts
 How to use this method
 
 ```javascript
-api.login('email', '123456test', function(err, data) {
+api.login('ully_access_token', function(err, data) {
     console.log(data);
 });
 ```
@@ -96,7 +91,7 @@ api.status(function(err, data) {
 });
 ```
 
-#### .me(callback)
+#### .account(callback)
 
 **Parameter**: `callback`
 **Type**: `Function`
@@ -107,17 +102,17 @@ function(err, data) {
 }
 ```
 
-The `me` method is responsible for showing profile info
+The `account` method is responsible for showing profile info
 
 How to use this method
 
 ```javascript
-api.me(function(err, data) {
+api.account(function(err, data) {
     console.log(data);
 });
 ```
 
-#### .updateMe(name, email, username, currentPassword, password, callback)
+#### .updateAccount(name, email, username, currentPassword, password, callback)
 
 **Parameter**: `name`
 **Type**: `String`
@@ -153,33 +148,12 @@ function(err, data) {
 }
 ```
 
-The `updateMe` method is responsible for update profile info
+The `updateAccount` method is responsible for update profile info
 
 How to use this method
 
 ```javascript
-api.updateMe('myname', 'email', 'myusername', '123456test', '123456test', function(err, data) {
-    console.log(data);
-});
-```
-
-#### .deleteMe(callback)
-
-**Parameter**: `callback`
-**Type**: `Function`
-**Example**: 
-```javascript
-function(err, data) {
-    
-}
-```
-
-The `deleteMe` method is responsible for delete profile info
-
-How to use this method
-
-```javascript
-api.deleteMe(function(err, data) {
+api.updateAccount('myname', 'email', 'myusername', '123456test', '123456test', function(err, data) {
     console.log(data);
 });
 ```
@@ -454,7 +428,7 @@ api.deleteUrls('collectionSlug', 'urlID', function(err, data) {
 
 ## Contributing
 
-1. Fork it [enytc/ully](https://github.com/enytc/ully/fork)
+1. Fork it [ullyin/ully](https://github.com/ullyin/ully/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am "Add some feature"`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -463,7 +437,7 @@ api.deleteUrls('collectionSlug', 'urlID', function(err, data) {
 See the [CONTRIBUTING Guidelines](CONTRIBUTING.md)
 
 ## Support
-If you have any problem or suggestion please open an issue [here](https://github.com/enytc/ully/issues).
+If you have any problem or suggestion please open an issue [here](https://github.com/ullyin/ully/issues).
 
 ## License
 

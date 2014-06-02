@@ -1,6 +1,6 @@
 /*
  * ully
- * https://github.com/enytc/ully
+ * https://github.com/ullyin/ully
  *
  * Copyright (c) 2014, EnyTC Corporation
  * Licensed under the BSD license.
