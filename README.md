@@ -44,12 +44,7 @@ api.login('ully_access_token', function(err, data) {
 });
 ```
 
-#### .statsByUsername(username, callback)
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
-
+#### .stats(callback)
 
 **Parameter**: `callback`
 **Type**: `Function`
@@ -60,12 +55,12 @@ function(err, data) {
 }
 ```
 
-The `statsByUsername` method is responsible for showing statistics of Ully
+The `stats` method is responsible for showing stats of Ully
 
 How to use this method
 
 ```javascript
-api.stats('myusername', function(err, data) {
+api.stats(function(err, data) {
     console.log(data);
 });
 ```
@@ -112,52 +107,6 @@ api.account(function(err, data) {
 });
 ```
 
-#### .updateAccount(name, email, username, currentPassword, password, callback)
-
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `myname`
-
-
-**Parameter**: `email`
-**Type**: `String`
-**Example**: `example@example.com`
-
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
-
-
-**Parameter**: `currentPassword`
-**Type**: `String`
-**Example**: `123456test`
-
-
-**Parameter**: `password`
-**Type**: `String`
-**Example**: `123456test`
-
-
-**Parameter**: `callback`
-**Type**: `Function`
-**Example**: 
-```javascript
-function(err, data) {
-    
-}
-```
-
-The `updateAccount` method is responsible for update profile info
-
-How to use this method
-
-```javascript
-api.updateAccount('myname', 'email', 'myusername', '123456test', '123456test', function(err, data) {
-    console.log(data);
-});
-```
-
 #### .collections(callback)
 
 **Parameter**: `callback`
@@ -179,33 +128,7 @@ api.collections(function(err, data) {
 });
 ```
 
-#### .collectionsByUsername(username, callback)
-
-**Parameter**: `username`
-**Type**: `String`
-**Example**: `myusername`
-
-
-**Parameter**: `callback`
-**Type**: `Function`
-**Example**: 
-```javascript
-function(err, data) {
-    
-}
-```
-
-The `collectionsByUsername` method is responsible for list all collections of a specific user
-
-How to use this method
-
-```javascript
-api.collectionsByUsername('username', function(err, data) {
-    console.log(data);
-});
-```
-
-#### .createCollections(name, slug, publicCollection, callback)
+#### .createCollection(name, slug, publicCollection, callback)
 
 **Parameter**: `name`
 **Type**: `String`
@@ -231,84 +154,17 @@ function(err, data) {
 }
 ```
 
-The `createCollections` method is responsible for create a new collection
+The `createCollection` method is responsible for create a new collection
 
 How to use this method
 
 ```javascript
-api.createCollections('name', 'slug', true, function(err, data) {
+api.createCollection('name', 'slug', true, function(err, data) {
     console.log(data);
 });
 ```
 
-#### .updateCollections(collectionSlug, name, slug, publicCollection, callback)
-
-**Parameter**: `collectionSlug`
-**Type**: `String`
-**Example**: `favorites`
-
-
-**Parameter**: `name`
-**Type**: `String`
-**Example**: `My Favorites`
-
-
-**Parameter**: `slug`
-**Type**: `String`
-**Example**: `myfavorites`
-
-
-**Parameter**: `publicCollection`
-**Type**: `Boolean`
-**Example**: `true`
-
-
-**Parameter**: `callback`
-**Type**: `Function`
-**Example**: 
-```javascript
-function(err, data) {
-    
-}
-```
-
-The `updateCollections` method is responsible for update a specific collection
-
-How to use this method
-
-```javascript
-api.updateCollections('collectionSlug', 'name', 'slug', true, function(err, data) {
-    console.log(data);
-});
-```
-
-#### .deleteCollections(collectionSlug, callback)
-
-**Parameter**: `collectionSlug`
-**Type**: `String`
-**Example**: `favorites`
-
-
-**Parameter**: `callback`
-**Type**: `Function`
-**Example**: 
-```javascript
-function(err, data) {
-    
-}
-```
-
-The `deleteCollections` method is responsible for delete a specific collection
-
-How to use this method
-
-```javascript
-api.deleteCollections('collectionSlug', function(err, data) {
-    console.log(data);
-});
-```
-
-#### .createUrls(collectionSlug, url, title, description, callback)
+#### .addUrl(collectionSlug, url, title, description, callback)
 
 **Parameter**: `collectionSlug`
 **Type**: `String`
@@ -339,41 +195,52 @@ function(err, data) {
 }
 ```
 
-The `createUrls` method is responsible for create a new url
+The `addUrl` method is responsible for create a new url
 
 How to use this method
 
 ```javascript
-api.createUrls('collectionSlug', 'http://example.com', 'Title of url', 'My example page', function(err, data) {
+api.addUrl('collectionSlug', 'http://example.com', 'Title of url', 'My example page',function(err, data) {
     console.log(data);
 });
 ```
 
-#### .updateUrls(collectionSlug, urlID, url, title, description, callback)
+#### .shortenedUrls(callback)
 
-**Parameter**: `collectionSlug`
-**Type**: `String`
-**Example**: `favorites`
+**Parameter**: `callback`
+**Type**: `Function`
+**Example**: 
+```javascript
+function(err, data) {
+    
+}
+```
 
+The `shortenedUrls` method is responsible for list all shortened urls
 
-**Parameter**: `urlID`
-**Type**: `String`
-**Example**: `urlID`
+How to use this method
 
+```javascript
+api.shortenedUrls(function(err, data) {
+    console.log(data);
+});
+```
+
+#### .shortenUrl(url, shortcode, password, callback)
 
 **Parameter**: `url`
 **Type**: `String`
-**Example**: `http://example.com`
+**Example**: `http://example.com/test/testing/assets/images/img.png`
 
 
-**Parameter**: `title`
+**Parameter**: `shortcode`
 **Type**: `String`
-**Example**: `Title of url`
+**Example**: `test`
 
 
-**Parameter**: `description`
+**Parameter**: `password`
 **Type**: `String`
-**Example**: `My example page`
+**Example**: `12345678`
 
 
 **Parameter**: `callback`
@@ -385,43 +252,12 @@ function(err, data) {
 }
 ```
 
-The `updateUrls` method is responsible for update a specific url
+The `shortenUrl` method is responsible for shorten strong urls
 
 How to use this method
 
 ```javascript
-api.updateUrls('collectionSlug', 'urlID', 'http://example.com', 'Title of url', 'My example page', function(err, data) {
-    console.log(data);
-});
-```
-
-#### .deleteUrls(collectionSlug, urlID, callback)
-
-**Parameter**: `collectionSlug`
-**Type**: `String`
-**Example**: `favorites`
-
-
-**Parameter**: `urlID`
-**Type**: `String`
-**Example**: `urlID`
-
-
-**Parameter**: `callback`
-**Type**: `Function`
-**Example**: 
-```javascript
-function(err, data) {
-    
-}
-```
-
-The `deleteUrls` method is responsible for delete a specific url
-
-How to use this method
-
-```javascript
-api.deleteUrls('collectionSlug', 'urlID', function(err, data) {
+api.shortenUrl('http://example.com/test/testing/assets/images/img.png', 'test', '12345678', function(err, data) {
     console.log(data);
 });
 ```
