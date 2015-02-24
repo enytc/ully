@@ -1,4 +1,4 @@
-# Ully [![Build Status](https://secure.travis-ci.org/ullyin/ully.png?branch=master)](http://travis-ci.org/ullyin/ully) [![NPM version](https://badge-me.herokuapp.com/api/npm/ully.png)](http://badges.enytc.com/for/npm/ully)
+# Ully [![Build Status](https://secure.travis-ci.org/ullyin/ully-cli.png?branch=master)](http://travis-ci.org/ullyin/ully-cli) [![NPM version](https://badge-me.herokuapp.com/api/npm/ully.png)](http://badges.enytc.com/for/npm/ully)
 
 > Manage your favorite links easily and quickly
 
@@ -264,7 +264,7 @@ api.shortenUrl('http://example.com/test/testing/assets/images/img.png', 'test', 
 
 ## Contributing
 
-1. Fork it [ullyin/ully](https://github.com/ullyin/ully/fork)
+1. Fork it [ullyin/ully-cli](https://github.com/ullyin/ully-cli/fork)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am "Add some feature"`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -273,13 +273,13 @@ api.shortenUrl('http://example.com/test/testing/assets/images/img.png', 'test', 
 See the [CONTRIBUTING Guidelines](CONTRIBUTING.md)
 
 ## Support
-If you have any problem or suggestion please open an issue [here](https://github.com/ullyin/ully/issues).
+If you have any problem or suggestion please open an issue [here](https://github.com/ullyin/ully-cli/issues).
 
 ## License
 
 The BSD License
 
-Copyright (c) 2014, EnyTC Corporation
+Copyright (c) 2015, EnyTC Corporation
 
 All rights reserved.
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
 /*
- * ully
- * https://github.com/ullyin/ully
+ * ully-cli
+ * https://github.com/ullyin/ully-cli
  *
- * Copyright (c) 2014, EnyTC Corporation
+ * Copyright (c) 2015, EnyTC Corporation
  * Licensed under the BSD license.
  */
 

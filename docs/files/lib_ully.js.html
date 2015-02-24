@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <link rel="icon" href="../assets/favicon.ico">
     <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
 </head>
 <body class="yui3-skin-sam">
@@ -14,10 +14,10 @@
 <div id="doc">
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
-                <h1><img src="../assets/css/logo.png" title="Ully CLI"></h1>
+                <h1><img src="../assets/css/logo.png" title="Ully CLI" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.6.0</em>
+            <em>API Docs for: 0.6.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -76,452 +76,452 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: lib/ully.js</h1>
-                        
-                        <div class="file">
-                            <pre class="code prettyprint linenums">
-                        /*
-                         * ully
-                         * https://github.com/ullyin/ully
-                         *
-                         * Copyright (c) 2014, EnyTC Corporation
-                         * Licensed under the BSD license.
-                         */
-                        
-                        &#x27;use strict&#x27;;
-                        
-                        /*
-                         * Module Dependencies
-                         */
-                        
-                        var request = require(&#x27;superagent&#x27;),
-                            inquirer = require(&#x27;inquirer&#x27;),
-                            async = require(&#x27;async&#x27;),
-                            _ = require(&#x27;underscore&#x27;),
-                            h = require(&#x27;./helpers.js&#x27;),
-                            join = require(&#x27;path&#x27;).join;
-                        
-                        /*
-                         * Public Methods
-                         */
-                        
-                        /**
-                         * @class Ully
-                         *
-                         * @constructor
-                         *
-                         * Constructor responsible for provide api requests
-                         *
-                         * @example
-                         *
-                         *     var api = new Ully(&#x27;AccessToken&#x27;);
-                         *
-                         * @param {String} AccessToken Access Token
-                         */
-                        
-                        var Ully = module.exports = function Ully(accessToken) {
-                            //Access Token
-                            this.AccessToken = accessToken;
-                            //apiUri
-                            this.uri = process.env.ULLY_URI || &#x27;https://ully.in/api/&#x27;;
-                            var apiUri = this.uri + &#x27;:path&#x27;;
-                            //Get handler
-                            this.get = function(path, callback) {
-                                request
-                                    .get(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.AccessToken))
-                                    .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
-                                    .end(callback);
-                            };
-                            //Post handler
-                            this.post = function(path, body, callback) {
-                                request
-                                    .post(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.AccessToken))
-                                    .send(body)
-                                    .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
-                                    .end(callback);
-                            };
-                            //Put handler
-                            this.put = function(path, body, callback) {
-                                request
-                                    .put(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.AccessToken))
-                                    .send(body)
-                                    .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
-                                    .end(callback);
-                            };
-                            //Delete handler
-                            this.delete = function(path, callback) {
-                                request
-                                    .del(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.AccessToken))
-                                    .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
-                                    .end(callback);
-                            };
-                        };
-                        
-                        //HandlerExceptions
-                        process.on(&#x27;uncaughtException&#x27;, function(err) {
-                            console.log();
-                            console.error(err);
-                            console.log();
-                            console.error(err.stack);
-                        });
-                        
-                        /**
-                         * Method responsible for asking questions
-                         *
-                         * @example
-                         *
-                         *     api.prompt(prompts, callback);
-                         *
-                         * @method prompt
-                         * @public
-                         * @param {Object} prompts Array of prompt options
-                         * @param {Function} callback A callback
-                         */
-                        
-                        Ully.prototype.prompt = function prompt(prompts, callback) {
-                            inquirer.prompt(prompts, function(answers) {
-                                callback(answers);
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for login in accounts
-                         *
-                         * @example
-                         *
-                         *     api.login(&#x27;accessToken&#x27;, function(err, data) {
-                         *          console.log(data);
-                         *     });
-                         *
-                         * @method login
-                         * @public
-                         * @param {String} AccessToken A Access Token
-                         * @param {Function} callback A callback with api response
-                         */
-                        
-                        Ully.prototype.login = function login(accessToken, callback) {
-                            //Write config
-                            if (accessToken &amp;&amp; accessToken.length &gt; 0) {
-                                h.write(join(__dirname, &#x27;ullyConfig.json&#x27;), JSON.stringify({
-                                    accessToken: accessToken
-                                }, null, 4));
-                                return callback(null, {
-                                    message: &#x27;Logged successfully!&#x27;
-                                });
-                            } else {
-                                return callback(null, {
-                                    message: &#x27;Login failed. Try again!&#x27;
-                                });
-                            }
-                        };
-                        
-                        /**
-                         * Method responsible for showing stats of Ully
-                         *
-                         * @example
-                         *
-                         *     api.stats(function(err, data) {
-                         *          console.log(data);
-                         *     });
-                         *
-                         * @method stats
-                         * @public
-                         * @param {Function} callback A callback with api response
-                         */
-                        
-                        Ully.prototype.stats = function stats(callback) {
-                            this.get(&#x27;stats&#x27;, function(err, res) {
-                                if (callback) {
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        callback(null, res.body.response);
-                                    }
-                                }
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for showing the status of api
-                         *
-                         * @example
-                         *
-                         *     api.status(function(err, data) {
-                         *          console.log(data);
-                         *     });
-                         *
-                         * @method status
-                         * @public
-                         * @param {Function} callback A callback with api response
-                         */
-                        
-                        Ully.prototype.status = function status(callback) {
-                            this.get(&#x27;status&#x27;, function(err, res) {
-                                if (callback) {
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        callback(null, res.body.response);
-                                    }
-                                }
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for showing profile info
-                         *
-                         * @example
-                         *
-                         *     api.account(function(err, data) {
-                         *          console.log(data);
-                         *     });
-                         *
-                         * @method account
-                         * @public
-                         * @param {Function} callback A callback with api response
-                         */
-                        
-                        Ully.prototype.account = function account(callback) {
-                            this.get(&#x27;account?:token&#x27;, function(err, res) {
-                                if (callback) {
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        callback(null, res.body.response);
-                                    }
-                                }
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for list all collections
-                         *
-                         * @example
-                         *
-                         *     api.collections(function(err, data) {
-                         *          console.log(data);
-                         *     });
-                         *
-                         * @method collections
-                         * @public
-                         * @param {Function} callback A callback with api response
-                         */
-                        
-                        Ully.prototype.collections = function collections(callback) {
-                            this.get(&#x27;collections?:token&#x27;, function(err, res) {
-                                if (callback) {
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        var obj = _.map(res.body.response, function(o) {
-                                            return _.pick(o, [&#x27;id&#x27;, &#x27;name&#x27;, &#x27;slug&#x27;, &#x27;urls&#x27;, &#x27;createdAt&#x27;, &#x27;updatedAt&#x27;]);
-                                        });
-                                        callback(null, obj);
-                                    }
-                                }
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for generate a dinamic list of collections
-                         *
-                         * @example
-                         *
-                         *     api.listCollections();
-                         *
-                         * @method listCollections
-                         * @public
-                         * @param {Function} callback A callback
-                         */
-                        
-                        Ully.prototype.listCollections = function listCollections(callback) {
-                            this.get(&#x27;collections?:token&#x27;, function(err, res) {
-                                if (err) {
-                                    throw err;
-                                }
-                                var list = [];
-                                //Start
-                                _.each(res.body.response, function(val) {
-                                    list.push({
-                                        name: val.name + &#x27; -&gt; &#x27; + val.slug,
-                                        value: val.slug
-                                    });
-                                });
-                                //Callback
-                                callback(list);
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for create a new collection
-                         *
-                         * @example
-                         *
-                         *     api.createCollection(&#x27;name&#x27;, &#x27;slug&#x27;, &#x27;public&#x27;, function(err, data) {
-                         *          console.log(data);
-                         *     });
-                         *
-                         * @method createCollection
-                         * @public
-                         * @param {String} name Name
-                         * @param {String} slug Slug
-                         * @param {Boolean} publicCollection Public Collection
-                         * @param {Function} callback A callback with api response
-                         */
-                        
-                        Ully.prototype.createCollection = function createCollection(name, slug, publicCollection, callback) {
-                            this.post(&#x27;collections?:token&#x27;, {
-                                name: name,
-                                slug: slug,
-                                public: publicCollection
-                            }, function(err, res) {
-                                if (callback) {
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        callback(null, res.body.response);
-                                    }
-                                }
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for create a new url
-                         *
-                         * @example
-                         *
-                         *     api.addUrl(&#x27;collectionSlug&#x27;, &#x27;url&#x27;, &#x27;title&#x27;, &#x27;description&#x27;, function(err, data) {
-                         *          console.log(data);
-                         *     });
-                         *
-                         * @method addUrl
-                         * @public
-                         * @param {String} collectionSlug Collection Slug
-                         * @param {String} url Url
-                         * @param {String} title Title
-                         * @param {String} description Description of url
-                         * @param {Function} callback A callback with api response
-                         */
-                        
-                        Ully.prototype.addUrl = function addUrl(collectionSlug, url, title, description, callback) {
-                            this.post(join(&#x27;collections&#x27;, &#x27;urls&#x27;, &#x27;?:token&#x27;), {
-                                title: title,
-                                url: url,
-                                description: description,
-                                slug: collectionSlug
-                            }, function(err, res) {
-                                if (callback) {
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        callback(null, res.body.response);
-                                    }
-                                }
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for list all shortened urls
-                         *
-                         * @example
-                         *
-                         *     api.shortenedUrls(function(err, data) {
-                         *          console.log(data);
-                         *     });
-                         *
-                         * @method shortenedUrls
-                         * @public
-                         * @param {Function} callback A callback with api response
-                         */
-                        
-                        Ully.prototype.shortenedUrls = function shortenedUrls(callback) {
-                            this.get(&#x27;shortener?:token&#x27;, function(err, res) {
-                                if (callback) {
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        callback(null, res.body.response);
-                                    }
-                                }
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for generate a dinamic list of shortened urls
-                         *
-                         * @example
-                         *
-                         *     api.listShortenedUrls();
-                         *
-                         * @method listShortenedUrls
-                         * @public
-                         * @param {Function} callback A callback
-                         */
-                        
-                        Ully.prototype.listShortenedUrls = function listShortenedUrls(callback) {
-                            this.get(&#x27;shortener?:token&#x27;, function(err, res) {
-                                if (err) {
-                                    throw err;
-                                }
-                                var list = [];
-                                //Start
-                                _.each(res.body.response, function(val) {
-                                    list.push({
-                                        name: val.url,
-                                        value: val.shortenedUrl
-                                    });
-                                });
-                                //Callback
-                                callback(list);
-                            });
-                        };
-                        
-                        /**
-                         * Method responsible for shorten urls
-                         *
-                         * @example
-                         *
-                         *     api.shortenUrl(&#x27;url&#x27;, &#x27;shortcode&#x27;, &#x27;password&#x27;, function(err, data) {
-                         *          console.log(data);
-                         *     });
-                         *
-                         * @method shortenUrl
-                         * @public
-                         * @param {String} url Url to shorten
-                         * @param {String} shortcode A custom shortcode (optional)
-                         * @param {String} password A password to protect this url (optional)
-                         * @param {Function} callback A callback with api response
-                         */
-                        
-                        Ully.prototype.shortenUrl = function shortenUrl(url, shortcode, password, callback) {
-                            this.post(&#x27;shortener?:token&#x27;, {
-                                url: url,
-                                shortcode: shortcode,
-                                password: password
-                            }, function(err, res) {
-                                if (callback) {
-                                    if (err) {
-                                        callback(err);
-                                    } else {
-                                        callback(null, res.body.response);
-                                    }
-                                }
-                            });
-                        };
-                        
-                        /*
-                                  |||                   |||
-                        |||           |||           |||     ||||||||||||
-                        |||       |||  |||         |||  ||| |||      |||
-                        |||       |||   |||       |||   ||| ||||||||||||
-                        |||       |||     |||    |||    ||| |||      |||
-                        ||||||||| |||      ||||||       ||| |||      |||
-                        *-----------------------------------------------*
-                            I LOVE YOU SO MUCH PRINCESS OF LORDAERON    
-                        */
-                        
-                            </pre>
-                        </div>
+<h1 class="file-heading">File: lib/ully.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/*
+ * ully-cli
+ * https://github.com/ullyin/ully-cli
+ *
+ * Copyright (c) 2015, EnyTC Corporation
+ * Licensed under the BSD license.
+ */
+
+&#x27;use strict&#x27;;
+
+/*
+ * Module Dependencies
+ */
+
+var request = require(&#x27;superagent&#x27;),
+    inquirer = require(&#x27;inquirer&#x27;),
+    async = require(&#x27;async&#x27;),
+    _ = require(&#x27;underscore&#x27;),
+    h = require(&#x27;./helpers.js&#x27;),
+    join = require(&#x27;path&#x27;).join;
+
+/*
+ * Public Methods
+ */
+
+/**
+ * @class Ully
+ *
+ * @constructor
+ *
+ * Constructor responsible for provide api requests
+ *
+ * @example
+ *
+ *     var api = new Ully(&#x27;AccessToken&#x27;);
+ *
+ * @param {String} AccessToken Access Token
+ */
+
+var Ully = module.exports = function Ully(accessToken) {
+    //Access Token
+    this.AccessToken = accessToken;
+    //apiUri
+    this.uri = process.env.ULLY_URI || &#x27;https://ully.in/api/&#x27;;
+    var apiUri = this.uri + &#x27;:path&#x27;;
+    //Get handler
+    this.get = function(path, callback) {
+        request
+            .get(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.AccessToken))
+            .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+            .end(callback);
+    };
+    //Post handler
+    this.post = function(path, body, callback) {
+        request
+            .post(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.AccessToken))
+            .send(body)
+            .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+            .end(callback);
+    };
+    //Put handler
+    this.put = function(path, body, callback) {
+        request
+            .put(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.AccessToken))
+            .send(body)
+            .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+            .end(callback);
+    };
+    //Delete handler
+    this.delete = function(path, callback) {
+        request
+            .del(apiUri.replace(new RegExp(&#x27;:path&#x27;, &#x27;g&#x27;), path).replace(new RegExp(&#x27;:token&#x27;, &#x27;g&#x27;), &#x27;access_token=&#x27; + this.AccessToken))
+            .set(&#x27;Accept&#x27;, &#x27;application/json&#x27;)
+            .end(callback);
+    };
+};
+
+//HandlerExceptions
+process.on(&#x27;uncaughtException&#x27;, function(err) {
+    console.log();
+    console.error(err);
+    console.log();
+    console.error(err.stack);
+});
+
+/**
+ * Method responsible for asking questions
+ *
+ * @example
+ *
+ *     api.prompt(prompts, callback);
+ *
+ * @method prompt
+ * @public
+ * @param {Object} prompts Array of prompt options
+ * @param {Function} callback A callback
+ */
+
+Ully.prototype.prompt = function prompt(prompts, callback) {
+    inquirer.prompt(prompts, function(answers) {
+        callback(answers);
+    });
+};
+
+/**
+ * Method responsible for login in accounts
+ *
+ * @example
+ *
+ *     api.login(&#x27;accessToken&#x27;, function(err, data) {
+ *          console.log(data);
+ *     });
+ *
+ * @method login
+ * @public
+ * @param {String} AccessToken A Access Token
+ * @param {Function} callback A callback with api response
+ */
+
+Ully.prototype.login = function login(accessToken, callback) {
+    //Write config
+    if (accessToken &amp;&amp; accessToken.length &gt; 0) {
+        h.write(join(__dirname, &#x27;ullyConfig.json&#x27;), JSON.stringify({
+            accessToken: accessToken
+        }, null, 4));
+        return callback(null, {
+            message: &#x27;Logged successfully!&#x27;
+        });
+    } else {
+        return callback(null, {
+            message: &#x27;Login failed. Try again!&#x27;
+        });
+    }
+};
+
+/**
+ * Method responsible for showing stats of Ully
+ *
+ * @example
+ *
+ *     api.stats(function(err, data) {
+ *          console.log(data);
+ *     });
+ *
+ * @method stats
+ * @public
+ * @param {Function} callback A callback with api response
+ */
+
+Ully.prototype.stats = function stats(callback) {
+    this.get(&#x27;stats&#x27;, function(err, res) {
+        if (callback) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, res.body.response);
+            }
+        }
+    });
+};
+
+/**
+ * Method responsible for showing the status of api
+ *
+ * @example
+ *
+ *     api.status(function(err, data) {
+ *          console.log(data);
+ *     });
+ *
+ * @method status
+ * @public
+ * @param {Function} callback A callback with api response
+ */
+
+Ully.prototype.status = function status(callback) {
+    this.get(&#x27;status&#x27;, function(err, res) {
+        if (callback) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, res.body.response);
+            }
+        }
+    });
+};
+
+/**
+ * Method responsible for showing profile info
+ *
+ * @example
+ *
+ *     api.account(function(err, data) {
+ *          console.log(data);
+ *     });
+ *
+ * @method account
+ * @public
+ * @param {Function} callback A callback with api response
+ */
+
+Ully.prototype.account = function account(callback) {
+    this.get(&#x27;account?:token&#x27;, function(err, res) {
+        if (callback) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, res.body.response);
+            }
+        }
+    });
+};
+
+/**
+ * Method responsible for list all collections
+ *
+ * @example
+ *
+ *     api.collections(function(err, data) {
+ *          console.log(data);
+ *     });
+ *
+ * @method collections
+ * @public
+ * @param {Function} callback A callback with api response
+ */
+
+Ully.prototype.collections = function collections(callback) {
+    this.get(&#x27;collections?:token&#x27;, function(err, res) {
+        if (callback) {
+            if (err) {
+                callback(err);
+            } else {
+                var obj = _.map(res.body.response, function(o) {
+                    return _.pick(o, [&#x27;id&#x27;, &#x27;name&#x27;, &#x27;slug&#x27;, &#x27;urls&#x27;, &#x27;createdAt&#x27;, &#x27;updatedAt&#x27;]);
+                });
+                callback(null, obj);
+            }
+        }
+    });
+};
+
+/**
+ * Method responsible for generate a dinamic list of collections
+ *
+ * @example
+ *
+ *     api.listCollections();
+ *
+ * @method listCollections
+ * @public
+ * @param {Function} callback A callback
+ */
+
+Ully.prototype.listCollections = function listCollections(callback) {
+    this.get(&#x27;collections?:token&#x27;, function(err, res) {
+        if (err) {
+            throw err;
+        }
+        var list = [];
+        //Start
+        _.each(res.body.response, function(val) {
+            list.push({
+                name: val.name + &#x27; -&gt; &#x27; + val.slug,
+                value: val.slug
+            });
+        });
+        //Callback
+        callback(list);
+    });
+};
+
+/**
+ * Method responsible for create a new collection
+ *
+ * @example
+ *
+ *     api.createCollection(&#x27;name&#x27;, &#x27;slug&#x27;, &#x27;public&#x27;, function(err, data) {
+ *          console.log(data);
+ *     });
+ *
+ * @method createCollection
+ * @public
+ * @param {String} name Name
+ * @param {String} slug Slug
+ * @param {Boolean} publicCollection Public Collection
+ * @param {Function} callback A callback with api response
+ */
+
+Ully.prototype.createCollection = function createCollection(name, slug, publicCollection, callback) {
+    this.post(&#x27;collections?:token&#x27;, {
+        name: name,
+        slug: slug,
+        public: publicCollection
+    }, function(err, res) {
+        if (callback) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, res.body.response);
+            }
+        }
+    });
+};
+
+/**
+ * Method responsible for create a new url
+ *
+ * @example
+ *
+ *     api.addUrl(&#x27;collectionSlug&#x27;, &#x27;url&#x27;, &#x27;title&#x27;, &#x27;description&#x27;, function(err, data) {
+ *          console.log(data);
+ *     });
+ *
+ * @method addUrl
+ * @public
+ * @param {String} collectionSlug Collection Slug
+ * @param {String} url Url
+ * @param {String} title Title
+ * @param {String} description Description of url
+ * @param {Function} callback A callback with api response
+ */
+
+Ully.prototype.addUrl = function addUrl(collectionSlug, url, title, description, callback) {
+    this.post(join(&#x27;collections&#x27;, &#x27;urls&#x27;, &#x27;?:token&#x27;), {
+        title: title,
+        url: url,
+        description: description,
+        slug: collectionSlug
+    }, function(err, res) {
+        if (callback) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, res.body.response);
+            }
+        }
+    });
+};
+
+/**
+ * Method responsible for list all shortened urls
+ *
+ * @example
+ *
+ *     api.shortenedUrls(function(err, data) {
+ *          console.log(data);
+ *     });
+ *
+ * @method shortenedUrls
+ * @public
+ * @param {Function} callback A callback with api response
+ */
+
+Ully.prototype.shortenedUrls = function shortenedUrls(callback) {
+    this.get(&#x27;shortener?:token&#x27;, function(err, res) {
+        if (callback) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, res.body.response);
+            }
+        }
+    });
+};
+
+/**
+ * Method responsible for generate a dinamic list of shortened urls
+ *
+ * @example
+ *
+ *     api.listShortenedUrls();
+ *
+ * @method listShortenedUrls
+ * @public
+ * @param {Function} callback A callback
+ */
+
+Ully.prototype.listShortenedUrls = function listShortenedUrls(callback) {
+    this.get(&#x27;shortener?:token&#x27;, function(err, res) {
+        if (err) {
+            throw err;
+        }
+        var list = [];
+        //Start
+        _.each(res.body.response, function(val) {
+            list.push({
+                name: val.url,
+                value: val.shortenedUrl
+            });
+        });
+        //Callback
+        callback(list);
+    });
+};
+
+/**
+ * Method responsible for shorten urls
+ *
+ * @example
+ *
+ *     api.shortenUrl(&#x27;url&#x27;, &#x27;shortcode&#x27;, &#x27;password&#x27;, function(err, data) {
+ *          console.log(data);
+ *     });
+ *
+ * @method shortenUrl
+ * @public
+ * @param {String} url Url to shorten
+ * @param {String} shortcode A custom shortcode (optional)
+ * @param {String} password A password to protect this url (optional)
+ * @param {Function} callback A callback with api response
+ */
+
+Ully.prototype.shortenUrl = function shortenUrl(url, shortcode, password, callback) {
+    this.post(&#x27;shortener?:token&#x27;, {
+        url: url,
+        shortcode: shortcode,
+        password: password
+    }, function(err, res) {
+        if (callback) {
+            if (err) {
+                callback(err);
+            } else {
+                callback(null, res.body.response);
+            }
+        }
+    });
+};
+
+/*
+          |||                   |||
+|||           |||           |||     ||||||||||||
+|||       |||  |||         |||  ||| |||      |||
+|||       |||   |||       |||   ||| ||||||||||||
+|||       |||     |||    |||    ||| |||      |||
+||||||||| |||      ||||||       ||| |||      |||
+*-----------------------------------------------*
+    I LOVE YOU SO MUCH PRINCESS OF LORDAERON    
+*/
+
+    </pre>
+</div>
                     </div>
                 </div>
             </div>
